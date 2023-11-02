@@ -9,6 +9,8 @@ import notices from './data/notices';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Alert from './components/Alert';
+import Admission from './components/Admission';
+import Studentdetails from './components/Studentdetails';
 function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
@@ -36,8 +38,10 @@ function App() {
       <Route exact path='/signup' element={<Signup isDarkTheme={isDarkTheme} showAlert={showAlert}/>} />
       <Route exact path="/map" element= {<Map  isDarkTheme={isDarkTheme} showAlert={showAlert}/>}/>
       <Route exact path="/" element= {<Sliding  isDarkTheme={isDarkTheme} />}/>
-      <Route exact path="/StudentNotice" element= {<StudentNotice notices={notices} isDarkTheme={isDarkTheme} 
+      <Route exact path="/admission" element = {<Admission isDarkTheme={isDarkTheme}/>} />
+      <Route exact path="/studentNotice" element= {<StudentNotice notices={notices} isDarkTheme={isDarkTheme} 
       showAlert={showAlert}/>}/>
+      <Route exact path="/Studentdetails" element={<Studentdetails/>} />
       </Routes>
       </div>
     </Router>

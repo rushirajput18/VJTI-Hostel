@@ -46,7 +46,10 @@ const Navbar = ({ toggleDarkTheme, isDarkTheme }) => {
                 </Link>
               </li>
               <li className="nav-item">
-          <Link className={`nav-link ${location.pathname==="/StudentNotice"? "active":""}`} to="/StudentNotice">Student Notice</Link>
+          <Link className={`nav-link ${location.pathname==="/StudentNotice"? "active":""}`} to="/studentNotice">Student Notice</Link>
+        </li>
+              <li className="nav-item">
+          <Link className={`nav-link ${location.pathname==="/Studentdetails"? "active":""}`} to="/studentdetails">Student Details</Link>
         </li>
               <li className="nav-item dropdown">
                 <Link

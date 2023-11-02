@@ -1,0 +1,30 @@
+/* styles.css */
+
+/* Dark theme styles */
+.dark-theme {
+    background-color: #222; /* Dark background color */
+    color: #fff; /* Light text color on dark background */
+  }
+  
+  .dark-card {
+    background-color: #333; /* Dark card background color */
+    color: #fff; /* Light text color on dark card */
+  }
+  
+  .dark-input {
+    background-color: #444; /* Dark input background color */
+    color: #fff; /* Light text color on dark input */
+    border: 1px solid #555; /* Dark border color */
+  }
+  
+  .dark-text {
+    color: #fff; /* Light text color for labels, etc. in dark mode */
+  }
+  
+  .dark-button {
+    background-color: #007bff; /* Dark button background color */
+    color: #fff; /* Light text color on dark button */
+  }
+  
+  /* Add more styles for different elements as needed */
+  
