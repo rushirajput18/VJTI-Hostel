@@ -16,7 +16,7 @@ const Navbar = ({ toggleDarkTheme, isDarkTheme }) => {
     <>
       <nav className={navbarClass}>
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/home">
+          <Link className="navbar-brand" to="/">
             VJTI Hostel
           </Link>
           <button
@@ -33,11 +33,13 @@ const Navbar = ({ toggleDarkTheme, isDarkTheme }) => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-              <Link className={`nav-link ${location.pathname==="/"? "active":""}`} to="/">Home</Link>
-              </li>
-              <li className="nav-item">
                 <Link className="nav-link" to="/admission">
                   Admissions
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/facilities">
+                  Facilities
                 </Link>
               </li>
               <li className="nav-item">
@@ -63,11 +65,6 @@ const Navbar = ({ toggleDarkTheme, isDarkTheme }) => {
                 </Link>
                 <ul className="dropdown-menu">
                   <li>
-                    <Link className="dropdown-item" to="/registration">
-                      Registration
-                    </Link>
-                  </li>
-                  <li>
                     <Link className="dropdown-item" to="/complaint">
                       Complaint
                     </Link>
@@ -75,11 +72,7 @@ const Navbar = ({ toggleDarkTheme, isDarkTheme }) => {
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
-                  <li>
-                    <Link className="dropdown-item" to="/facilities">
-                      Facilities
-                    </Link>
-                  </li>
+                 
                 </ul>
               </li>
             </ul>
