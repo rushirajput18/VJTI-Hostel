@@ -43,6 +43,11 @@ const Navbar = ({ toggleDarkTheme, isDarkTheme }) => {
                 </Link>
               </li>
               <li className="nav-item">
+                <Link className="nav-link" to="/sendcomplaint">
+                  Send Complaint
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link" to="/map">
                   Map
                 </Link>
