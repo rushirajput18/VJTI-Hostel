@@ -1,28 +1,24 @@
 import React from 'react'
 
-const SendComplaint = () => {
+const SendComplaint = ({ isDarkTheme }) => {
   return (
     <div>
       
       <div>
-            <div className="container my-3">
-                <h2>Add a Note</h2>
+            <div className={`container my-3 ${isDarkTheme?'bg-dark':'bg-light'}`}>
+                <h2 className={`text-${isDarkTheme?"light":"dark"}`}>Add a complaint</h2>
                 <form className="my-3">
                     <div className="mb-3">
-                        <label htmlFor="title" className="form-label">Title</label>
+                        <label htmlFor="title" className={`form-label text-${isDarkTheme?"light":"dark"}`} >Complaint</label>
                         <input type="text" className="form-control" id="title" name="title" aria-describedby="emailHelp"  />
 
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="description" className="form-label">Desciption</label>
+                        <label htmlFor="description" className={`form-label text-${isDarkTheme?"light":"dark"}`}>Desciption</label>
                         <input type="text" className="form-control" id="description" name="description"  />
                     </div>
-                    <div className="mb-3">
-                        <label htmlFor="tag" className="form-label">Tag</label>
-                        <input type="text" className="form-control" id="tag" name="tag" />
-                    </div>
-                   
-                    <button type="submit" className="btn btn-primary" >Submit</button>
+                  
+                    <button type="submit" className={`btn btn-${isDarkTheme?'light':'dark'} my-2`} >Submit</button>
                 </form>
 
             </div>

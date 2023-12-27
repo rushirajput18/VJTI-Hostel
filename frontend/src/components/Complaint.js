@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Complaint = () => {
+const Complaint = ({isDarkTheme}) => {
   return (
     <div className='container'>
       

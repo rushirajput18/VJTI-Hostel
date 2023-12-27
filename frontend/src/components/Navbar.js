@@ -82,12 +82,12 @@ const Navbar = ({ toggleDarkTheme, isDarkTheme }) => {
               </li>
             </ul>
             {!localStorage.getItem('token')?<form className="d-flex" role="search">
-      <Link className={`btn btn-${isDarkTheme?"secondary":"primary"} mx-1`} to="/login" role="button">Login</Link>
-      <Link className={`btn btn-${isDarkTheme?"secondary":"primary"} mx-1`} to="/signup" role="button">Sign Up</Link>
+      <Link className={`btn btn-${isDarkTheme?"light":"primary"} mx-1`} to="/login" role="button">Login</Link>
+      <Link className={`btn btn-${isDarkTheme?"light":"primary"} mx-1`} to="/signup" role="button">Sign Up</Link>
       </form>: <button onClick={handleLogout} className='btn btn-primary'>Logout</button>}
       <button
               onClick={toggleDarkTheme}
-              className={`btn btn-${isDarkTheme?"secondary":"primary"} mx-2`}
+              className={`btn btn-${isDarkTheme?"light":"primary"} mx-2`}
             >
               {isDarkTheme ? "Switch to Light" : "Switch to Dark"} Theme
             </button>
