@@ -1,7 +1,7 @@
 import Map from './components/Map'
 
 import React, { useState } from 'react';
-import Sliding from './components/sliding';
+import Sliding from './components/Sliding';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Navbar from './components/Navbar';
 import StudentNotice from './components/StudentNotice';
@@ -47,7 +47,7 @@ function App() {
       <Route exact path="/admission" element = {<Admission isDarkTheme={isDarkTheme}/>} />
       <Route exact path="/studentNotice" element= {<StudentNotice notices={notices} isDarkTheme={isDarkTheme} 
       showAlert={showAlert}/>}/>
-      <Route exact path="/Studentdetails" element={<Studentdetails/>} />
+      <Route exact path="/Studentdetails" element={<Studentdetails isDarkTheme={isDarkTheme}/>}/>
       </Routes>
       </div>
     </Router>
