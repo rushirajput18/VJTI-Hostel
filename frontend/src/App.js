@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Navbar from './components/Navbar';
 import StudentNotice from './components/StudentNotice';
 import Login from './components/Login';
-import Signup from './components/Signup';
 import Alert from './components/Alert';
 import Admission from './components/Admission';
 import Studentdetails from './components/Studentdetails';
@@ -33,7 +32,7 @@ function App() {
       <div className='w-100px'>
       <Routes>
       <Route exact path='/login' element={<Login showAlert={showAlert}/> } />
-      <Route exact path='/signup' element={<Signup  showAlert={showAlert}/>} />
+      {/* <Route exact path='/signup' element={<Signup  showAlert={showAlert}/>} /> */}
       <Route exact path="/map" element= {<Map showAlert={showAlert}/>}/>
       <Route exact path="/" element= {<Sliding/>}/>
       <Route exact path="/sendcomplaint" element= {<SendComplaint />}/>

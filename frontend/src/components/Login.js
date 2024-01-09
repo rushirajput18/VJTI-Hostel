@@ -108,7 +108,7 @@ const Login = ({ props }) => {
                   />
                 </div>
                 <div className="text">
-                  <a href="#">Forgot password?</a>
+                  <a href="a">Forgot password?</a>
                 </div>
                 <div className="button input-box">
                   <input type="submit" value="Submit" />

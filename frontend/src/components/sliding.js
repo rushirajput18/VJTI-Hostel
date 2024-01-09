@@ -3,6 +3,7 @@ import { Link, animateScroll as scroll } from 'react-scroll';
 import About from './About';
 import { useNavigate } from 'react-router-dom';
 import vdo from './Images/videoplayback.mp4';
+import Footer from './Footer';
 
 const Sliding = () => {
   const navigate = useNavigate();
@@ -68,10 +69,10 @@ const Sliding = () => {
     scroll.scrollToBottom();
   };
 
-  const handleNavigateToAdmission = () => {
-    // Navigate to the "/admission" route
-    navigate('/admission');
-  };
+  // const handleNavigateToAdmission = () => {
+  //   // Navigate to the "/admission" route
+  //   navigate('/admission');
+  // };
 
   const handleNavigateToMap = () => {
     // Navigate to the "/map" route
@@ -137,6 +138,7 @@ const Sliding = () => {
         </div>
       </div>
       <About />
+      <Footer/>
     </>
   );
 };
