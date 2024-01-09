@@ -1,0 +1,99 @@
+  header{
+    border-radius: 5px;
+  height : auto;
+  text-align: center;
+  background-color: #7d2ae8
+  }
+  
+  footer{
+    margin-top: 70px;
+    margin-bottom: 70px;
+    background-color: rgb(123, 189, 123);
+  }
+  
+  p, h1{
+    padding:10px;
+    margin:0%;
+  }
+  section{
+    position: absolute;
+    top: 10%;
+    left:25%;
+    width:50%;
+  }
+  .submitButton{
+    width: 100px;
+  }
+  article{
+  min-width: 300px;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid steelblue;
+  background-color: white;
+  }
+  
+  
+  input{
+    width:300px;
+    border:none;
+    background-color: white;
+    border-bottom:1px solid grey ;
+    height: 30px;
+  }
+  
+  input, label, p, #district{
+    font-size: 16px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  
+  button{
+    display: block;
+    margin: 20px;
+    width:60px;
+    border-radius: 4px;
+    height:30px;
+    color: white;
+    font-size: 18px;
+    float: right;
+    border: none;
+    background-color: rosybrown;
+  
+  }
+  
+  #district{
+    height:50px;
+  }
+  
+  /*combinatir selector*/
+  header p{
+    text-align: center;
+  }
+  
+  article p{
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 2px;
+  }
+  /*psuedo class selector*/
+  input:focus{
+    outline-color: red;
+    background-color: rgb(155, 155, 200);
+  }
+  /*pseudo element selectr*/
+  
+  header p::first-line{
+    font-weight: bold;
+    color:rgb(212, 157, 137);
+  }
+  
+  article p::after{
+    content:"*";
+    color:red;
+  
+  }
+  
+  input[name^="option"]{
+    width:10px;
+    height:10px;
+  }

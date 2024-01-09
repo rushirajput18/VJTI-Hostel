@@ -1,0 +1,78 @@
+.maindiv {
+    width: 1024px;
+    color: aliceblue;
+    margin: auto;
+  }
+  
+  .img-section {
+    height: 500px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    color: blueviolet;
+  }
+  
+  .div6 {
+    background-image: url(https://media.collegedekho.com/media/img/news/VJTI_Mumbai_Placements_2023.jpg);
+    width: 100%;
+    background-color: rgba(0,0,0,0.7); /* Adjust the alpha value for opacity */
+    color: rgb(20, 3, 3);
+    background-repeat: no-repeat;
+    
+    line-height: 128.3%;
+    padding: 20px;
+    margin: auto;
+    margin-top: -470px;
+    height: 100vh;
+  }
+  
+  .div6 h4 {
+    font-size: 30px;
+    text-align: center;
+    padding: 1px;
+    padding: 14px;
+    border-bottom: 1px solid #e9dbdb;
+    text-decoration: none;
+  }
+  
+  .div6 li {
+    background-color: rgba(0,0,0,0.3);   
+     border-bottom: 1px solid #ffffff78;
+    list-style: none;
+    margin-bottom: 10px;
+    font-size: larger;
+    padding: 10px;
+    position: relative;
+
+  }
+  
+  .div6 li::before {
+    content: '\2022';
+    color: black;
+    font-size: 1.5em;
+    position: absolute;
+    left: -1.5em;
+  }
+  
+  .div ul {
+    padding-bottom: 20px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  a:hover {
+    color: black;
+  }
+  
+  .footer {
+    background-color: #f1c40f;
+    color: rgb(23, 3, 3);
+    text-align: center;
+    padding: 30px;
+    width: 94%;
+    font-size: 25px;
+    display: inline-block;
+  }
+  

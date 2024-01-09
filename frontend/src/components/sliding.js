@@ -1,37 +1,144 @@
 import React from 'react';
-import image1 from './Images/images.jpg'
+import { Link, animateScroll as scroll } from 'react-scroll';
+import About from './About';
+import { useNavigate } from 'react-router-dom';
+import vdo from './Images/videoplayback.mp4';
 
-import image3 from './Images/images5.jpg';
-const Sliding = ({ isDarkTheme }) => {
+const Sliding = () => {
+  const navigate = useNavigate();
+
+  const videoStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    minWidth: '100%',
+    minHeight: '100%',
+    width: 'auto',
+    height: 'auto',
+    zIndex: '-1',
+  };
+
+  const containerStyle = {
+    position: 'relative',
+    width: '100%',
+    height: '95vh', // Adjust this for the desired height
+    overflow: 'hidden',
+  };
+
+  const overlayStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '25%', // Positioned on the left quarter
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    width: '25%',
+    padding: '20px',
+    textAlign: 'center',
+    color: 'white',
+  };
+
+  const linkStyle = {
+    display: 'block',
+    textDecoration: 'none',
+    color: 'white',
+    marginBottom: '10px', // Gap between list items
+    borderTop: '1px solid teal', // Teal border added here
+    paddingTop: '10px',
+    // Added hover style
+    ':hover': {
+      backgroundColor: '#7d2ae8', 
+    },
+  };
+
+  const headingStyle = {
+    fontSize: '2em',
+    marginBottom: '10px',
+  };
+
+  const columnsStyle = {
+    display: 'block',
+    paddingTop: '10px',
+    marginTop: '10px',
+    color: 'white',
+  };
+
+  const handleScrollToAbout = () => {
+    // Assuming "aboutSection" is the ID of the element in About.js
+    scroll.scrollToBottom();
+  };
+
+  const handleNavigateToAdmission = () => {
+    // Navigate to the "/admission" route
+    navigate('/admission');
+  };
+
+  const handleNavigateToMap = () => {
+    // Navigate to the "/map" route
+    navigate('/map');
+  };
 
   return (
     <>
-    <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
-    <ol className="carousel-indicators">
-      <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    </ol>
-    <div className="carousel-inner">
-      <div className="carousel-item active">
-        <img className="d-block w-100" src={image1} alt="First slide"/>
+      <div style={containerStyle}>
+        <video src={vdo} autoPlay muted loop playsInline style={videoStyle} />
+        <div style={overlayStyle}>
+          <div style={headingStyle}>VJTI Hostel</div>
+          <div style={columnsStyle}>
+          <a
+  className="nav-link"
+  href="http://127.0.0.1:5500/VJTI-Hostel/frontend/src/components/form/index.html"
+  style={linkStyle}
+  onMouseEnter={(e) => {
+    e.target.style.backgroundColor = '#7d2ae8';
+  }}
+  onMouseLeave={(e) => {
+    e.target.style.backgroundColor = '';
+  }}
+>
+  Admissions
+</a>
+            {/* <button
+              className="nav-link"
+              onClick={handleNavigateToAdmission}
+              style={linkStyle}
+            >
+              Admissions
+            </button> */}
+            <Link
+              className="nav-link"
+              onClick={handleNavigateToMap}
+              style={linkStyle}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#7d2ae8';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = '';
+              }}
+            >
+              Virtual Tour
+            </Link>
+            {/* Use react-scroll to smoothly scroll to the "About Us" section */}
+            <Link
+              className="nav-link"
+              to="aboutSection"
+              style={linkStyle}
+              onClick={handleScrollToAbout}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#7d2ae8';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = '';
+              }}
+            >
+              About
+            </Link>
+          </div>
+        </div>
       </div>
-      <div className="carousel-item">
-        <img className="d-block w-100" src={image3} alt="Second slide"/>
-      </div>
-      <div className="carousel-item">
-        <img className="d-block w-100" src={image1} alt="Third slide"/>
-      </div>
-    </div>
-    <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span className="sr-only">Previous</span>
-    </a>
-    <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-      <span className="carousel-control-next-icon" aria-hidden="true"></span>
-      <span className="sr-only">Next</span>
-    </a>
-  </div>
-  </>
-)}
+      <About />
+    </>
+  );
+};
+
 export default Sliding;
