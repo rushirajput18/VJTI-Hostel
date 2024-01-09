@@ -5,7 +5,6 @@ import Sliding from './components/Sliding';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Navbar from './components/Navbar';
 import StudentNotice from './components/StudentNotice';
-import notices from './data/notices';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Alert from './components/Alert';
@@ -15,11 +14,7 @@ import Facilities from './components/Facilities';
 import Complaint from './components/Complaint';
 import SendComplaint from './components/SendComplaint';
 function App() {
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
-
-  const toggleDarkTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
-  };
+ 
   const [alert, setAlert] = useState(null);
   const showAlert = (message, type)=>{
     setAlert({
@@ -33,21 +28,21 @@ function App() {
   return (
     <>
     <Router>
-      <Navbar toggleDarkTheme={toggleDarkTheme} isDarkTheme={isDarkTheme} />
+      <Navbar />
       <Alert alert={alert}/>
       <div className='w-100px'>
       <Routes>
-      <Route exact path='/login' element={<Login isDarkTheme={isDarkTheme} showAlert={showAlert}/> } />
-      <Route exact path='/signup' element={<Signup isDarkTheme={isDarkTheme} showAlert={showAlert}/>} />
-      <Route exact path="/map" element= {<Map  isDarkTheme={isDarkTheme} showAlert={showAlert}/>}/>
-      <Route exact path="/" element= {<Sliding  isDarkTheme={isDarkTheme} />}/>
-      <Route exact path="/complaint" element= {<Complaint  isDarkTheme={isDarkTheme} />}/>
-      <Route exact path="/sendcomplaint" element= {<SendComplaint  isDarkTheme={isDarkTheme} />}/>
-      <Route exact path="/facilities" element= {<Facilities  isDarkTheme={isDarkTheme} />}/>
-      <Route exact path="/admission" element = {<Admission isDarkTheme={isDarkTheme}/>} />
-      <Route exact path="/studentNotice" element= {<StudentNotice notices={notices} isDarkTheme={isDarkTheme} 
+      <Route exact path='/login' element={<Login showAlert={showAlert}/> } />
+      <Route exact path='/signup' element={<Signup  showAlert={showAlert}/>} />
+      <Route exact path="/map" element= {<Map showAlert={showAlert}/>}/>
+      <Route exact path="/" element= {<Sliding/>}/>
+      <Route exact path="/sendcomplaint" element= {<SendComplaint />}/>
+      <Route path="/complaint" element={<Complaint/>} />      
+      <Route exact path="/facilities" element= {<Facilities/>}/>
+      <Route exact path="/admission" element = {<Admission />} />
+      <Route exact path="/studentNotice" element= {<StudentNotice 
       showAlert={showAlert}/>}/>
-      <Route exact path="/Studentdetails" element={<Studentdetails isDarkTheme={isDarkTheme}/>}/>
+      <Route exact path="/Studentdetails" element={<Studentdetails />}/>
       </Routes>
       </div>
     </Router>

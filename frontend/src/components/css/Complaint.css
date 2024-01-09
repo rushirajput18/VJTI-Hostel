@@ -1,0 +1,56 @@
+/* Complaint.css */
+
+.complaint-section {
+  padding: 20px;
+}
+
+.complaint-heading {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+}
+
+.complaint-list {
+  background-color: rgb(125, 42, 232);
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px; /* Increased margin between the list and details */
+}
+
+.complaint-list h2 {
+  color: black;
+}
+
+.complaint-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.complaint-list li {
+  margin-bottom: 10px; /* Increased margin between each complaint */
+}
+
+.complaint-list a {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.complaint-list a:hover {
+  text-decoration: underline;
+}
+
+.complaint-details {
+  background-color: rgb(125, 42, 232);
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.complaint-details h2 {
+  color: black;
+}
+
+/* Add more styles as needed */

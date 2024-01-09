@@ -1,30 +1,140 @@
-/* styles.css */
+/* Google Font Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
-/* Dark theme styles */
-.dark-theme {
-    background-color: #222; /* Dark background color */
-    color: #fff; /* Light text color on dark background */
+
+.container {
+  margin-top: 80px;
+  position: relative;
+  max-width: 1000px; /* Adjusted to take up the entire width */
+  background: #fff;
+  padding: 40px 30px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  perspective: 2700px;
+}
+.input-box {
+  display: flex;
+  align-items: center;
+}
+.select-label {
+  margin-right: 10px; /* Adjust the margin as needed */
+}
+.container .cover {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  width: 50%;
+  z-index: 98;
+  transition: all 1s ease;
+  transform-origin: left;
+  transform-style: preserve-3d;
+}
+
+.container #flip:checked ~ .cover {
+  transform: rotateY(-180deg);
+}
+
+.container .cover .front,
+.container .cover .back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.cover .back {
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}
+
+.container .cover::before,
+.container .cover::after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #6f36b8;
+  opacity: 0.4;
+  z-index: 12;
+}
+
+.container .cover::after {
+  opacity: 0.3;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}
+
+.container .cover img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  z-index: 10;
+}
+
+.container .cover .text {
+  position: absolute;
+  z-index: 130;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover .text .text-1,
+.cover .text .text-2 {
+  font-size: 26px;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+}
+
+.cover .text .text-2 {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.container .forms {
+  height: 100%;
+  width: 100%;
+  background: #fff;
+}
+
+.container .form-content {
+  display: flex;
+  flex-wrap: wrap; /* Allow forms to wrap to the next line on smaller screens */
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-content .login-form,
+.form-content .signup-form {
+  width: 100%; /* Each form takes 100% width */
+  max-width: calc(50% - 15px); /* Adjusted to reduce space between forms */
+  margin-bottom: 20px; /* Space between forms */
+}
+
+.container #flip{
+  display: none;
+}
+@media (max-width: 730px) {
+  .container .cover{
+    display: none;
   }
-  
-  .dark-card {
-    background-color: #333; /* Dark card background color */
-    color: #fff; /* Light text color on dark card */
+  .form-content .login-form,
+  .form-content .signup-form{
+    width: 100%;
   }
-  
-  .dark-input {
-    background-color: #444; /* Dark input background color */
-    color: #fff; /* Light text color on dark input */
-    border: 1px solid #555; /* Dark border color */
+  .form-content .signup-form{
+    display: none;
   }
-  
-  .dark-text {
-    color: #fff; /* Light text color for labels, etc. in dark mode */
+  .container #flip:checked ~ .forms .signup-form{
+    display: block;
   }
-  
-  .dark-button {
-    background-color: #007bff; /* Dark button background color */
-    color: #fff; /* Light text color on dark button */
+  .container #flip:checked ~ .forms .login-form{
+    display: none;
   }
-  
-  /* Add more styles for different elements as needed */
-  
+}

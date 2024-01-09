@@ -1,0 +1,261 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+
+.container {
+    max-width: 700px;
+    width: 100%;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.container .title {
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+}
+
+.container .title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+
+.container form .user-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+}
+
+form .user-details .input-box {
+    margin-bottom: 15px;
+    width: calc(50% - 10px); /* Adjusted width calculation */
+}
+
+.user-details .input-box .details {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.user-details .input-box input {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 15px;
+    font-size: 16px;
+    transition: border-color 0.3s ease; /* Simplified transition property */
+}
+
+.user-details .input-box input:focus,
+.user-details .input-box input:valid {
+    border-color: #9b59b6;
+}
+
+form .gender-details .gender-title {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+form .gender-details .category {
+    display: flex;
+    width: 80%;
+    margin: 14px 0;
+    justify-content: space-between;
+}
+
+form .gender-details .category label {
+    display: flex;
+    align-items: center;
+}
+
+form .gender-details .category .dot {
+    height: 18px;
+    width: 18px;
+    background: #d9d9d9;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 5px solid transparent;
+}
+
+#dot-1:checked ~ .category .one,
+#dot-2:checked ~ .category .two {
+    border-color: #d9d9d9;
+    background: #9b59b6;
+}
+
+form input[type="radio"] {
+    display: none;
+}
+
+form .button {
+    height: 45px;
+    margin: 45px 0;
+}
+
+form .button input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    cursor: pointer; /* Added cursor pointer on hover */
+}
+
+form .button input:hover {
+    background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+}
+
+@media (max-width: 584px) {
+    .container {
+        max-width: 100%;
+    }
+
+    form .user-details .input-box {
+        width: 100%;
+    }
+
+    form .gender-details .category {
+        width: 100%;
+    }
+
+    .container form .user-details {
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+
+    .user-details::-webkit-scrollbar {
+        width: 0;
+    }
+}
+
+/* TAB css */
+/* ... Your existing CSS ... */
+
+/* New CSS for tabs */
+.container .tabs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.container .tabs .tab {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    background-color: #ccc;
+    cursor: pointer;
+    border-radius: 5px 5px 0 0;
+}
+
+.container .tabs .tab:hover {
+    background-color: #ddd;
+}
+
+.container .content {
+    background-color: #fff;
+    border-radius: 0 0 5px 5px;
+    padding: 20px;
+}
+
+.container .tab-content {
+    display: none;
+}
+
+.container .tab-content.active {
+    display: block;
+}
+
+/* Style the tabs when active */
+#personal-tab.active {
+    background-color: #71b7e6;
+    color: #fff;
+}
+
+#education-tab.active {
+    background-color: #9b59b6;
+    color: #fff;
+}
+
+
+/* Drop down listinformaton */
+/* Style the input-box container */
+.input-box {
+    margin-bottom: 20px;
+}
+
+/* Style the label */
+.input-box label {
+    display: block; /* Make the label a block element for better spacing */
+    margin-bottom: 5px; /* Add some space between label and select */
+    font-weight: bold; /* Make the label text bold */
+}
+
+/* Style the select dropdown */
+.input-box select {
+    width: 100%; /* Make the select element fill its container */
+    padding: 10px; /* Add some padding for better appearance */
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 4px; /* Add rounded corners */
+    font-size: 16px; /* Set the font size */
+    outline: none; /* Remove the default focus outline */
+}
+
+/* Style the select options */
+.input-box select option {
+    font-size: 16px; /* Set the font size for options */
+}
+/* button download */
+.button {
+    height: 45px;
+    margin: 45px 0;
+}
+
+
+.button input[type="submit"] {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    cursor: pointer; /* Added cursor pointer on hover */
+}
+
+.button input:hover {
+    background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+}
+
+/* temp */
+
+

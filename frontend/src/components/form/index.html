@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+	<!-- <script src="script.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
+<style>
+    .body
+    {
+        background-image: url('https://vjti.ac.in/wp-content/uploads/2021/07/VJTI-LandingPageV3.jpg');
+    }
+</style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <div class="tab" id="personal-tab">Personal Information</div>
+            <div class="tab" id="education-tab">Education</div>
+        </div>
+        <div class="content">
+            <div class="tab-content" id="personal-info">
+                <!-- Personal Information Form Fields Here -->
+                <div class="container"  id="registrationForm" >
+                    <div class="title">Registration</div>
+                    <form id="registration-form" method="post"  name="google-sheet">
+                        <div class="user-details">
+                            <div class="input-box">
+                                <span class="details">First Name</span>
+                                <input type="text" placeholder="Enter Your First Name" name="First Name" id="first-name" required pattern="[A-Za-z ]+" title="Only alphabetic characters are allowed">
+                            </div>
+                            
+                            <div class="input-box">
+                                <span class="details">Middle Name</span>
+                                <input type="text" placeholder="Enter Your Middle Name" name="Middle Name" id="middle-name" required pattern="[A-Za-z ]+" title="Only alphabetic characters are allowed">
+                            </div>
+                            
+                            <div class="input-box">
+                                <span class="details">Last Name</span>
+                                <input type="text" placeholder="Enter Your Last Name" name="Last Name" id="last-name" required pattern="[A-Za-z ]+" title="Only alphabetic characters are allowed">
+                            </div>
+                            
+                            <div class="input-box">
+                                <span class="details">Father Name</span>
+                                <input type="text" placeholder="Enter Your Father Name" name="Father Name" id="father-name" required pattern="[A-Za-z ]+" title="Only alphabetic characters are allowed">
+                            </div>
+                            
+                            <div class="input-box">
+                                <span class="details">Mother Name</span>
+                                <input type="text" placeholder="Enter Your Mother Name" name="Mother Name" id="mother-name" required pattern="[A-Za-z ]+" title="Only alphabetic characters are allowed">
+                            </div>
+                            
+                            <div class="input-box">
+                                <span class="details">DOB</span>
+                                <input type="date" placeholder="Enter Your DOB" name="DOB" id="dob" required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Birth Place</span>
+                                <input type="text" placeholder="Enter Your Birth Place" name="Birth Place" id="birth-place" required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Address</span>
+                                <input type="text" placeholder="Enter Your Address" name="Address" id="address" required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">District</span>
+                                <input type="text" placeholder="Enter Your District" name="District" id="district" required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Country</span>
+                                <input type="text" placeholder="Enter Your Country" name="Country" id="country" required>
+                            </div>
+                            
+                            <div class="input-box">
+                                <span class="details">Mobile Number</span>
+                                <input type="tel" placeholder="Enter Your Mobile Number" name="Mobile Number" id="mobile-number" required pattern="[0-9]{10}" maxlength="10">
+                            </div>
+                            
+                            
+                            <div class="input-box">
+                                <span class="details">Email</span>
+                                <input type="email" placeholder="Enter Your Email Address" name="Email" id="email" required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Email</span>
+                                <input type="email" placeholder="Enter Your Email Address" name="Email" id="email" required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details" for="otp">OTP</span>
+                                <input type="text" class="form-control" id="otp" placeholder="Enter OTP" name="otp"/>
+                            </div>
+                        </div>
+                        <div class="gender-details">
+                            <input type="radio" name="gender" id="dot-1" required>
+                            <input type="radio" name="gender" id="dot-2" required>
+                            <span class="gender-title">Gender</span>
+                            <div class="category">
+                                <label for="dot-1">
+                                    <span class="dot one"></span>
+                                    <span class="gender">Male</span>
+                                </label>
+                                <label for="dot-2">
+                                    <span class="dot two"></span>
+                                    <span class="gender">Female</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="button">
+                            <input type="submit" value="Register">
+                           
+                        </div>
+                        
+                    </form>
+                    <!-- <button type="submit" class="registerbtn" id="register-btn">Download</button> -->
+                   
+                </div>
+            </div>
+            <div class="tab-content" id="education-info">
+                
+                <div class="container">
+                    <div class="title">Education Information</div>
+                    <form action="#">
+                        <div class="user-details">
+                            <div class="input-box">
+                                <label for="education-level">Education Level:</label>
+                                <select id="education-level" name="education-level" required>
+                                    <option value="high-school">High School</option>
+                                    <option value="bachelor">Bachelor's Degree</option>
+                                    <option value="master">Master's Degree</option>
+                                    <option value="doctorate">Doctorate</option>
+                                </select>
+                            </div>
+                            <div class="input-box">
+                                <span class="details"> College Name</span>
+                                <input type="text" placeholder="Enter Your College Name" required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details"> Pointer</span>
+                                <input type="text" placeholder="Enter Your Pointer" required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details"> Last Name</span>
+                                <input type="text" placeholder="Enter Your Last Name" required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details"> Father Name</span>
+                                <input type="text" placeholder="Enter Your Father Name" required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details"> Mother Name</span>
+                                <input type="text" placeholder="Enter Your Mother Name" required>
+                            </div>
+                            <div class="input-box">
+                                <label for="graduation-year">Graduation Year:</label>
+                                <input type="number" id="graduation-year" name="graduation-year" placeholder="Enter Graduation Year" required>
+                            </div>
+                        </div>
+                        <div class="gender-details">
+                            <input type="radio" name="gender" id="dot-1">
+                            <input type="radio" name="gender" id="dot-2">
+                            <!-- <input type="radio" name="gender" id="dot-3"> -->
+                            <span class="gender-title">Gender</span>
+                            <div class="category" >
+                                <label for="dot-1"  >
+                                    <span class="dot one"></span>
+                                    <span class="gender" >Male</span>
+                                </label>
+                                <label for="dot-2">
+                                    <span class="dot two" ></span>
+                                    <span class="gender">Female</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="registerbtn" id="register-btn">Download</button>
+
+            
+                    </form>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwf32JotQGqVx7ZWeN0j_NV6SNB_WglEMhEj6QItZ6eDhUw9ngLTLW4J-obEVJRpifzsg/exec'
+        const form = document.forms['google-sheet']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => alert("Thanks for Contacting us..! We Will Contact You Soon..."))
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
+</body>
+</html>

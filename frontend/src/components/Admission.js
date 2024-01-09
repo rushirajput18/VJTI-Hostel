@@ -1,112 +1,167 @@
-import React from 'react';
-import './css/Admission.css';
-const Admission = ({ isDarkTheme }) => {
+import React, { useRef } from "react";
+import { usePDF } from "react-to-pdf";
+import "./css/Admission.css";
+import img from "./Images/admission.jpg";
+
+const Admission = () => {
+  const { toPDF, targetRef } = usePDF({ filename: "admission_form.pdf" });
+  const emailRef = useRef(null);
+  const fullNameRef = useRef(null);
+  const dateOfBirthRef = useRef(null);
+  const genderRef = useRef(null);
+  const mobileNumberRef = useRef(null);
+  const regIdRef = useRef(null);
+  const yearRef = useRef(null);
+  const branchRef = useRef(null);
+  const homeAddressRef = useRef(null);
+  const blockRef = useRef(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Retrieve values from the form fields
+    const data = {
+      email: emailRef.current.value,
+      fullName: fullNameRef.current.value,
+      dateOfBirth: dateOfBirthRef.current.value,
+      gender: genderRef.current.value,
+      mobileNumber: mobileNumberRef.current.value,
+      regId: regIdRef.current.value,
+      year: yearRef.current.value,
+      branch: branchRef.current.value,
+      homeAddress: homeAddressRef.current.value,
+      block: blockRef.current.value,
+    };
+
+    // Log the data to the console (you can modify this part to suit your needs)
+    console.log("Form Data:", data);
+
+    // Generate PDF
+    toPDF();
+  };
   return (
-    <div className={isDarkTheme ? 'admi dark-theme' : 'admi'}>
-      <section className={isDarkTheme ? 'vh-100 gradient-custom dark-theme' : 'vh-100 gradient-custom'}>
-        <div className="container py-5 h-100">
-          <div className="row justify-content-center align-items-center h-100">
-            <div className="col-12 col-lg-9 col-xl-7">
-              <div className={isDarkTheme ? 'card shadow-2-strong dark-card' : 'card shadow-2-strong card-registration'} style={{ borderRadius: "15px" }}>
-                <div className="card-body p-4 p-md-5">
-                  <h3 className="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
-                  <form>
+    <div id="admission" className="container">
+      <input type="checkbox" id="flip" />
+      <div className="cover">
+        <div className="front">
+          <img className="backImg" src={img} alt="" />
+        </div>
+        <div className="back">
+          <img className="backImg" src={img} alt="" />
+        </div>
+      </div>
+      <div className="forms">
+        <div className="form-content">
+          <div className="login-form">
+            <div className="title">Admission Form</div>
+            <form onSubmit={handleSubmit}>
+              <div className="input-boxes">
+                <div className="input-box">
+                  <i className="fas fa-envelope"></i>
+                  <input
+                    type="text"
+                    placeholder="Email"
+                    ref={emailRef}
+                    required
+                  />
+                </div>
+                <div className="input-box">
+                  <i className="fas fa-user"></i>
+                  <input
+                    type="text"
+                    placeholder="Full Name"
+                    ref={fullNameRef}
+                    required
+                  />
+                </div>
+                <div className="input-box">
+                  <i className="fas fa-calendar-alt" />
 
-                    <div className="row">
-                      <div className="col-md-6 mb-4">
-
-                        <div className="form-outline">
-                          <input type="text" id="firstName" className={`form-control form-control-lg ${isDarkTheme ? 'dark-input' : ''}`} />
-                          <label className="form-label" for="firstName">First Name</label>
-                        </div>
-
-                      </div>
-                      <div className="col-md-6 mb-4">
-
-                        <div className="form-outline">
-                          <input type="text" id="lastName" className={`form-control form-control-lg ${isDarkTheme ? 'dark-input' : ''}`} />
-                          <label className="form-label" for="lastName">Last Name</label>
-                        </div>
-
-                      </div>
-                    </div>
-
-                    <div className="row">
-                      <div className="col-md-6 mb-4 d-flex align-items-center">
-
-                        <div className={`form-outline datepicker w-100 ${isDarkTheme ? 'dark-input' : ''}`}>
-                          <input type="text" className={`form-control form-control-lg ${isDarkTheme ? 'dark-input' : ''}`} id="birthdayDate" />
-                          <label for="birthdayDate" className="form-label">Birthday</label>
-                        </div>
-
-                      </div>
-                      <div className="col-md-6 mb-4">
-
-                        <h6 className={`mb-2 pb-1 ${isDarkTheme ? 'dark-text' : ''}`}>Gender: </h6>
-
-                        <div className={`form-check form-check-inline ${isDarkTheme ? 'dark-text' : ''}`}>
-                          <input className={`form-check-input ${isDarkTheme ? 'dark-input' : ''}`} type="radio" name="inlineRadioOptions" id="femaleGender" value="option1" checked />
-                          <label className="form-check-label" for="femaleGender">Female</label>
-                        </div>
-
-                        <div className={`form-check form-check-inline ${isDarkTheme ? 'dark-text' : ''}`}>
-                          <input className={`form-check-input ${isDarkTheme ? 'dark-input' : ''}`} type="radio" name="inlineRadioOptions" id="maleGender" value="option2" />
-                          <label className="form-check-label" for="maleGender">Male</label>
-                        </div>
-
-                        <div className={`form-check form-check-inline ${isDarkTheme ? 'dark-text' : ''}`}>
-                          <input className={`form-check-input ${isDarkTheme ? 'dark-input' : ''}`} type="radio" name="inlineRadioOptions" id="otherGender" value="option3" />
-                          <label className="form-check-label" for="otherGender">Other</label>
-                        </div>
-
-                      </div>
-                    </div>
-
-                    <div className="row">
-                      <div className="col-md-6 mb-4 pb-2">
-
-                        <div className="form-outline">
-                          <input type="email" id="emailAddress" className={`form-control form-control-lg ${isDarkTheme ? 'dark-input' : ''}`} />
-                          <label className="form-label" for="emailAddress">Email</label>
-                        </div>
-
-                      </div>
-                      <div className="col-md-6 mb-4 pb-2">
-
-                        <div className="form-outline">
-                          <input type="tel" id="phoneNumber" className={`form-control form-control-lg ${isDarkTheme ? 'dark-input' : ''}`} />
-                          <label className="form-label" for="phoneNumber">Phone Number</label>
-                        </div>
-
-                      </div>
-                    </div>
-
-                    <div className="row">
-                      <div className="col-12">
-
-                        <select className={`select form-control-lg ${isDarkTheme ? 'dark-input' : ''}`}>
-                          <option value="1" disabled>Choose Block</option>
-                          <option value="2">Block-A</option>
-                          <option value="3">Block-B</option>
-                          <option value="4">Block-C</option>
-                          <option value="4">Block-D</option>
-                        </select>
-                        <label className="form-label select-label">Choose Block</label>
-
-                      </div>
-                    </div>
-
-                    <div className="mt-4 pt-2">
-                      <input className={`btn btn-primary btn-lg ${isDarkTheme ? 'dark-button' : ''}`} type="submit" value="Submit" />
-                    </div>
-
-                  </form>
+                  <input ref={dateOfBirthRef} type="date" />
+                </div>
+                <div className="input-box">
+                  <input
+                    ref={genderRef}
+                    type="radio"
+                    name="gender"
+                    value="male"
+                  />{" "}
+                  Male
+                  <input
+                    ref={genderRef}
+                    type="radio"
+                    name="gender"
+                    value="female"
+                  />{" "}
+                  Female
+                </div>
+                <div className="input-box">
+                  <i className="fas fa-mobile-alt"></i>
+                  <input
+                    ref={mobileNumberRef}
+                    type="number"
+                    placeholder="Mobile Number"
+                    required
+                  />
+                </div>
+                <div className="input-box">
+                  <i className="fas fa-id-card"></i>
+                  <input
+                    ref={regIdRef}
+                    type="text"
+                    placeholder="Reg ID"
+                    required
+                  />
+                </div>
+                <div className="input-box">
+                  <i className="fas fa-book"></i>
+                  <input
+                    ref={yearRef}
+                    type="text"
+                    placeholder="Year"
+                    required
+                  />
+                </div>
+                <div className="input-box">
+                  <i className="fas fa-book"></i>
+                  <input
+                    ref={branchRef}
+                    type="text"
+                    placeholder="Branch"
+                    required
+                  />
+                </div>
+                <div className="input-box">
+                  <i className="fas fa-map-marker-alt"></i>
+                  <input
+                    ref={homeAddressRef}
+                    type="text"
+                    placeholder="Home Address"
+                    required
+                  />
+                </div>
+                <div className="input-box">
+                  <label className="form-label select-label">
+                    Choose Block
+                  </label>
+                  <select ref={blockRef}>
+                    <option value="1" disabled>
+                      Choose Block
+                    </option>
+                    <option value="2">Block-A</option>
+                    <option value="3">Block-B</option>
+                    <option value="4">Block-C</option>
+                    <option value="4">Block-D</option>
+                  </select>
+                </div>
+                <div className="button input-box">
+                  <input type="submit" value="Submit" />
                 </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };
