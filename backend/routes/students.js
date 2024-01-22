@@ -16,11 +16,12 @@ router.get('/fetchallstudents', async (req, res) => {
 // Route 2: Add a new student
 router.post('/addstudent', async (req, res) => {
   try {
-    const { Student_ID, Name, Gender, Home_Address, Phone_Number, Parent_Phone_Number, Hostel_Block } = req.body;
+    const { Student_ID, Name,Email, Gender, Home_Address, Phone_Number, Parent_Phone_Number, Hostel_Block } = req.body;
     
     const student = new Student({
       Student_ID,
       Name,
+      Email,
       Gender,
       Home_Address,
       Phone_Number,
@@ -44,6 +45,7 @@ router.put('/updatestudent/:id', async (req, res) => {
     const updatedStudent = {
       Student_ID,
       Name,
+      Email,
       Gender,
       Home_Address,
       Phone_Number,
