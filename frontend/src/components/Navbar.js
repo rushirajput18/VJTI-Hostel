@@ -40,20 +40,12 @@ const Navbar = () => {
               </li>
               {isLoggedIn && (
                 <>
-                  <li className="nav-item">
-                  <a
-  className="nav-link"
-  href="http://127.0.0.1:5500/VJTI-Hostel/frontend/src/components/form/index.html"
-  onMouseEnter={(e) => {
-    e.target.style.backgroundColor = '#7d2ae8';
-  }}
-  onMouseLeave={(e) => {
-    e.target.style.backgroundColor = '';
-  }}
->
-  Admissions
-</a>
+                 <li className="nav-item">
+                    <Link className="nav-link" to="/admission">
+                     Admission
+                    </Link>
                   </li>
+                 
                   <li className="nav-item">
                 <Link className="nav-link" to="https://rzp.io/l/wVrc0Ngo5">
                   Fees Payment

@@ -16,7 +16,7 @@ router.get('/fetchallstudents', async (req, res) => {
 // Route 2: Add a new student
 router.post('/addstudent', async (req, res) => {
   try {
-    const { Student_ID, Name,Email, Gender, Home_Address, Phone_Number, Parent_Phone_Number, Hostel_Block } = req.body;
+    const { Student_ID, Name,Email, Gender, Home_Address, Phone_Number, Parent_Phone_Number, Hostel_Room_No } = req.body;
     
     const student = new Student({
       Student_ID,
@@ -26,7 +26,7 @@ router.post('/addstudent', async (req, res) => {
       Home_Address,
       Phone_Number,
       Parent_Phone_Number,
-      Hostel_Block,
+      Hostel_Room_No,
     });
 
     const savedStudent = await student.save();
@@ -39,7 +39,7 @@ router.post('/addstudent', async (req, res) => {
 
 // Route 3: Update an existing student
 router.put('/updatestudent/:id', async (req, res) => {
-  const { Student_ID, Name, Gender, Home_Address, Phone_Number, Parent_Phone_Number, Hostel_Block } = req.body;
+  const { Student_ID, Name, Gender, Home_Address, Phone_Number, Parent_Phone_Number, Hostel_Room_No } = req.body;
 
   try {
     const updatedStudent = {
@@ -50,7 +50,7 @@ router.put('/updatestudent/:id', async (req, res) => {
       Home_Address,
       Phone_Number,
       Parent_Phone_Number,
-      Hostel_Block,
+      Hostel_Room_No,
     };
 
     const student = await Student.findByIdAndUpdate(req.params.id, updatedStudent, { new: true });

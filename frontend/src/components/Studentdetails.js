@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Studentdetails = () => {
-
     const [details, setDetails] = useState([]);
-    const [selectedrow, setSelectedrow] = useState({ Student_ID: "", Name: "", Gender: "", Home_Address: "", Phone_Number: "", Parent_Phone_Number: "", Hostel_Block: "" });
+    const [selectedrow, setSelectedrow] = useState({ Student_ID: "", Name: "", Gender: "", Home_Address: "", Phone_Number: "", Parent_Phone_Number: "", Hostel_Room_No: "" });
     const [formData, setFormData] = useState({
         Student_ID: '',
         Name: '',
@@ -15,87 +14,108 @@ const Studentdetails = () => {
         Home_Address: '',
         Hostel_Room_No: ''
     });
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
         });
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios
-            .post('http://localhost:5000/api/students/addstudent', formData)
-            
-
+        await axios.post('http://localhost:5000/api/students/addstudent', formData);
+        window.location.reload();
     };
+
     const onClickRow = (studentrow) => {
         setSelectedrow(studentrow);
-    }
-    //1. get all studentd data
+    };
+
+    //1. get all student data
     useEffect(() => {
-        axios.get('http://localhost:5000/api/students/fetchallstudents').then((response) => {
-            setDetails(response.data);
-        }).catch((error) => {
-            console.error(error);
-        });
+        axios.get('http://localhost:5000/api/students/fetchallstudents')
+            .then((response) => {
+                setDetails(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }, []);
 
     //3.DELETE
-    const handleDelete = async(id) =>{
-        await axios
-      .delete(`http://localhost:5000/api/students/deletestudent/${id}`)
-      .then(() => {
-        const newDetails = details.filter((detail)=> {return detail._id!==id})
-        setDetails(newDetails);
-      });
-    }
-    return (
-        <div>
-            {/* <ul>{details.map(detail => <li key={detail._id}>{detail.Name}</li>)}</ul> */}
-            <div style={{ padding: '2rem', border: "2px solid red", display: 'flex', alignContent: 'flex-start' }}>
-                <table className="table table-dark table-striped container" style={{ flex: 1, width: '50%', height: '50%', float: 'left' }}>
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Registration No.</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Contact No.</th>
-                            <th scope="col">Delete</th>
-                            <th scope="col">Update</th>
-                        </tr>
-                    </thead>
-                    {details.map((detail, index) => <tbody key={detail._id} >
-                        <tr onClick={() => onClickRow(detail)}>
-                            <th scope="row">{index + 1}</th>
-                            <td>{detail.Student_ID}</td>
-                            <td>{detail.Name}</td>
-                            <td>{detail.Phone_Number}</td>
-                            <td><i className="fa-solid fa-trash mx-2" onClick={()=>handleDelete(detail._id)}></i></td>
-                            <td><i className="fa-regular fa-pen-to-square mx-2"  ></i></td>
-                        </tr>
-                    </tbody>)}
-                </table>
-                <div >
-                    <div class="card container" style={{ width: '20rem', }}>
-                        <div class="card-header">
-                            DETAILS
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Student ID : {selectedrow.Student_ID}</li>
-                            <li class="list-group-item">Name : {selectedrow.Name}</li>
-                            <li class="list-group-item">Email : {selectedrow.Email}</li>
-                            <li class="list-group-item">Student Phone No. : {selectedrow.Phone_Number}</li>
-                            <li class="list-group-item">Parent Phone No. : {selectedrow.Parent_Phone_Number}</li>
-                            <li class="list-group-item">Gender : {selectedrow.Gender}</li>
-                            <li class="list-group-item">Home Address : {selectedrow.Home_Address}</li>
-                            <li class="list-group-item">Hostel Room No. : {selectedrow.Block}</li>
-                        </ul>
-                    </div>
+    const handleDelete = async (id) => {
+        await axios.delete(`http://localhost:5000/api/students/deletestudent/${id}`)
+            .then(() => {
+                const newDetails = details.filter((detail) => detail._id !== id);
+                setDetails(newDetails);
+            });
+    };
 
+    const [isFormVisible, setIsFormVisible] = useState(false);
+
+    // Function to toggle the visibility of the form
+    const toggleFormVisibility = () => {
+        setIsFormVisible(!isFormVisible);
+    };
+
+    return (
+        <>
+            <button style={{ width: '200px' }} onClick={toggleFormVisibility}>
+                {isFormVisible ? 'View Student Details' : 'Add a new Student'}
+            </button>
+
+            {!isFormVisible && (
+                <div style={{ padding: '2rem', border: '2px solid red', display: 'flex', alignContent: 'flex-start' }}>
+                    {details.length === 0 ? <p>No Student found</p> :
+                        <table className="table table-dark table-striped container" style={{ flex: 1, width: '50%', height: '50%', float: 'left' }}>
+                           <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Registration No.</th>
+          <th scope="col">Name</th>
+          <th scope="col">Contact No.</th>
+          <th scope="col">Delete</th>
+          <th scope="col">Update</th>
+        </tr>
+      </thead>
+      {details.map((detail, index) => (
+        <tbody key={detail._id}>
+          <tr onClick={() => onClickRow(detail)}>
+            <th scope="row">{index + 1}</th>
+            <td>{detail.Student_ID}</td>
+            <td>{detail.Name}</td>
+            <td>{detail.Phone_Number}</td>
+            <td><i className="fa-solid fa-trash mx-2" onClick={() => handleDelete(detail._id)}></i></td>
+            <td><i className="fa-regular fa-pen-to-square mx-2"></i></td>
+          </tr>
+        </tbody>
+      ))}
+                        </table>
+                    }
+                       {details.length > 0 && (
+      <div>
+        <div className="card container" style={{ width: '20rem', marginLeft:'13px'}}>
+          <div className="card-header">DETAILS</div>
+          <ul className="list-group list-group-flush">
+            <li className="list-group-item">Student ID: {selectedrow.Student_ID}</li>
+            <li className="list-group-item">Name: {selectedrow.Name}</li>
+            <li className="list-group-item">Email: {selectedrow.Email}</li>
+            <li className="list-group-item">Student Phone No.: {selectedrow.Phone_Number}</li>
+            <li className="list-group-item">Parent Phone No.: {selectedrow.Parent_Phone_Number}</li>
+            <li className="list-group-item">Gender: {selectedrow.Gender}</li>
+            <li className="list-group-item">Home Address: {selectedrow.Home_Address}</li>
+            <li className="list-group-item">Hostel Room No.: {selectedrow.Hostel_Room_No}</li>
+          </ul>
+        </div>
+      </div>
+    )}
                 </div>
-            </div>
-            <div style={{ padding: '2rem', paddingTop: '5rem' }} >
-                <form className='container' style={{ paddingBottom: '4rem' }} onSubmit={handleSubmit}>
+            )}
+
+            {isFormVisible && (
+                <div style={{ padding: '2rem', border: "2px solid red", display: 'flex', alignContent: 'flex-start' }}>
+                      <form className='container' style={{ paddingBottom: '4rem' }} onSubmit={handleSubmit}>
                     <h1>Add new Student</h1>
                     <div className="mb-3">
                         <label htmlFor="studentID" className="form-label">Student ID</label>
@@ -127,16 +147,17 @@ const Studentdetails = () => {
                         <input type="text" className="form-control" id="homeAddress" name="Home_Address" value={formData.Home_Address} onChange={handleChange} />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="hostelRoomNo" className="form-label">Hostel Room No.</label>
-                        <input type="text" className="form-control" id="hostelRoomNo" name="Hostel_Block" value={formData.Hostel_Block} onChange={handleChange} />
+                        <label htmlFor="hostelRoomNo" className="form-label">Hostel Room No</label>
+                        <input type="text" className="form-control" id="hostelRoomNo" name="Hostel_Room_No" value={formData.Hostel_Room_No} onChange={handleChange} />
                     </div>
                     <div >
                         <button type="submit" className="btn btn-primary" style={{ width: '5rem' }}>Submit</button>
                     </div>
-                </form>
-            </div>
-        </div>
-    )
-}
+                    </form>
+                </div>
+            )}
+        </>
+    );
+};
 
-export default Studentdetails
+export default Studentdetails;

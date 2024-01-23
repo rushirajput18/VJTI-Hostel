@@ -78,6 +78,10 @@ const Sliding = () => {
     // Navigate to the "/map" route
     navigate('/map');
   };
+  const handleNavigateToAdmission = () => {
+    // Navigate to the "/map" route
+    navigate('/admission');
+  };
 
   return (
     <>
@@ -86,19 +90,18 @@ const Sliding = () => {
         <div style={overlayStyle}>
           <div style={headingStyle}>VJTI Hostel</div>
           <div style={columnsStyle}>
-          <a
-  className="nav-link"
-  href="http://127.0.0.1:5500/VJTI-Hostel/frontend/src/components/form/index.html"
-  style={linkStyle}
+        
+                    <Link style={linkStyle}
   onMouseEnter={(e) => {
     e.target.style.backgroundColor = '#7d2ae8';
   }}
   onMouseLeave={(e) => {
     e.target.style.backgroundColor = '';
-  }}
->
-  Admissions
-</a>
+  }} className="nav-link" onClick={handleNavigateToAdmission}>
+                     Admission
+                    </Link>
+                  
+
             {/* <button
               className="nav-link"
               onClick={handleNavigateToAdmission}
