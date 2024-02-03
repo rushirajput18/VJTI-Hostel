@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const Studentdetails = () => {
     const [details, setDetails] = useState([]);
+    const [isUpdateFormVisible, setIsUpdateFormVisible] = useState(false);
     const [selectedrow, setSelectedrow] = useState({ Student_ID: "", Name: "", Gender: "", Home_Address: "", Phone_Number: "", Parent_Phone_Number: "", Hostel_Room_No: "" });
     const [formData, setFormData] = useState({
         Student_ID: '',
@@ -30,6 +31,17 @@ const Studentdetails = () => {
 
     const onClickRow = (studentrow) => {
         setSelectedrow(studentrow);
+        setIsUpdateFormVisible(true);
+        setFormData({
+            Student_ID: studentrow.Student_ID,
+            Name: studentrow.Name,
+            Email: studentrow.Email,
+            Phone_Number: studentrow.Phone_Number,
+            Parent_Phone_Number: studentrow.Parent_Phone_Number,
+            Gender: studentrow.Gender,
+            Home_Address: studentrow.Home_Address,
+            Hostel_Room_No: studentrow.Hostel_Room_No
+        });
     };
 
     //1. get all student data
@@ -50,6 +62,14 @@ const Studentdetails = () => {
                 const newDetails = details.filter((detail) => detail._id !== id);
                 setDetails(newDetails);
             });
+    };
+    const handleUpdate = async (e) => {
+        
+        // Use the data from formData and selectedrow to perform the update
+        await axios.put(`http://localhost:5000/api/students/updatestudent/${selectedrow.Student_ID}`, formData);
+        
+        setIsUpdateFormVisible(false);
+        window.location.reload();
     };
 
     const [isFormVisible, setIsFormVisible] = useState(false);
@@ -87,7 +107,7 @@ const Studentdetails = () => {
             <td>{detail.Name}</td>
             <td>{detail.Phone_Number}</td>
             <td><i className="fa-solid fa-trash mx-2" onClick={() => handleDelete(detail._id)}></i></td>
-            <td><i className="fa-regular fa-pen-to-square mx-2"></i></td>
+            <td><i className="fa-regular fa-pen-to-square mx-2" onClick={() => handleUpdate(detail._id)}></i></td>
           </tr>
         </tbody>
       ))}
@@ -115,8 +135,8 @@ const Studentdetails = () => {
 
             {isFormVisible && (
                 <div style={{ padding: '2rem', border: "2px solid red", display: 'flex', alignContent: 'flex-start' }}>
+                    <h1 style={{justifyContent:'center'}}>Add new Student</h1>
                       <form className='container' style={{ paddingBottom: '4rem' }} onSubmit={handleSubmit}>
-                    <h1>Add new Student</h1>
                     <div className="mb-3">
                         <label htmlFor="studentID" className="form-label">Student ID</label>
                         <input type="text" className="form-control" id="studentID" name="Student_ID" value={formData.Student_ID} onChange={handleChange} />
@@ -151,11 +171,58 @@ const Studentdetails = () => {
                         <input type="text" className="form-control" id="hostelRoomNo" name="Hostel_Room_No" value={formData.Hostel_Room_No} onChange={handleChange} />
                     </div>
                     <div >
-                        <button type="submit" className="btn btn-primary" style={{ width: '5rem' }}>Submit</button>
+                        <button type="submit" className="submitButton" style={{}}>Submit</button>
                     </div>
                     </form>
                 </div>
             )}
+             {isUpdateFormVisible && (
+            <div style={{ padding: '2rem', border: '2px solid green', display: 'flex', alignContent: 'flex-start' }}>
+                <h1 style={{ justifyContent: 'center' }}>Update Student Details</h1>
+                <form className='container' style={{ paddingBottom: '4rem' }} onSubmit={handleUpdate()}>
+                    {/* ... (same form inputs as in the add new student form) */}
+                    <div className="mb-3">
+                        <label htmlFor="studentID" className="form-label">Student ID</label>
+                        <input type="text" className="form-control" id="studentID" name="Student_ID" value={formData.Student_ID} onChange={handleChange} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="name" className="form-label">Name</label>
+                        <input type="text" className="form-control" id="name" name="Name" value={formData.Name} onChange={handleChange} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="email" className="form-label">Email address</label>
+                        <input type="email" className="form-control" id="email" name="Email" value={formData.Email} onChange={handleChange} />
+
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="phoneNumber" className="form-label">Phone Number</label>
+                        <input type="text" className="form-control" id="phoneNumber" name="Phone_Number" value={formData.Phone_Number} onChange={handleChange} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="parentPhoneNumber" className="form-label">Parent Phone Number</label>
+                        <input type="text" className="form-control" id="parentPhoneNumber" name="Parent_Phone_Number" value={formData.Parent_Phone_Number} onChange={handleChange} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="gender" className="form-label">Gender</label>
+                        <input type="text" className="form-control" id="gender" name="Gender" value={formData.Gender} onChange={handleChange} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="homeAddress" className="form-label">Home Address</label>
+                        <input type="text" className="form-control" id="homeAddress" name="Home_Address" value={formData.Home_Address} onChange={handleChange} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="hostelRoomNo" className="form-label">Hostel Room No</label>
+                        <input type="text" className="form-control" id="hostelRoomNo" name="Hostel_Room_No" value={formData.Hostel_Room_No} onChange={handleChange} />
+                    </div>
+                    <div >
+                        <button type="submit" className="submitButton" style={{}}>Submit</button>
+                    </div>
+                    <div>
+                        <button type="submit" className="updateButton">Update</button>
+                    </div>
+                </form>
+            </div>
+        )}
         </>
     );
 };

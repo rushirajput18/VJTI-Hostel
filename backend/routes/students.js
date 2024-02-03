@@ -39,7 +39,7 @@ router.post('/addstudent', async (req, res) => {
 
 // Route 3: Update an existing student
 router.put('/updatestudent/:id', async (req, res) => {
-  const { Student_ID, Name, Gender, Home_Address, Phone_Number, Parent_Phone_Number, Hostel_Room_No } = req.body;
+  const { Student_ID, Name, Email, Gender, Home_Address, Phone_Number, Parent_Phone_Number, Hostel_Room_No } = req.body;
 
   try {
     const updatedStudent = {

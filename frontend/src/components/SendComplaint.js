@@ -7,7 +7,7 @@ const SendComplaint = () => {
     roomNumber: "",
     mobileNumber: "",
     email: "",
-    issueType: [],
+    issueType: "",
     description: "",
   });
 
@@ -34,22 +34,11 @@ const SendComplaint = () => {
   // };
 
   const handleChange = (e) => {
-    const { name, value, cid, checked, type } = e.target;
-
-    if (type === "checkbox") {
-      const updatedIssueType = [...formData.issueType];
-      updatedIssueType[cid] = checked ? value : '';
-
-      setFormData({
-        ...formData,
-        issueType: updatedIssueType,
-      });
-    } else {
+    const { name, value } = e.target;
       setFormData({
         ...formData,
         [name]: value,
       });
-    }
   };
 
 
@@ -76,7 +65,7 @@ const SendComplaint = () => {
           roomNumber: "",
           mobileNumber: "",
           email: "",
-          issueType: [],
+          issueType: "",
           description: "",
           availability: "",
         });
@@ -162,58 +151,15 @@ const SendComplaint = () => {
 
         {/* Checkbox Section */}
         <article>
-          <p>Choose the issue type</p>
-          <p>Check at least one box without fail</p>
+          <p>Issue Type</p>
           <input
-            type="checkbox"
-            id="c1"
+            type="text"
+            required
+            placeholder="For Ex. Water Leak, Electricity Issue, Missing Item, Cleanliness Issue, etc"
             onChange={handleChange}
             name="issueType"
-            value={formData.issueType[0]}
-            cid={0}
+            value={formData.issueType}
           />
-          <label htmlFor="c1">Missing Item</label>
-          <br />
-          <input
-            type="checkbox"
-            id="c2"
-            onChange={handleChange}
-            name="issueType"
-            value={formData.issueType[1]}
-            cid={1}
-          />
-          <label htmlFor="c2">Electricity Issue</label>
-          <br />
-          <input
-            type="checkbox"
-            id="c3"
-            onChange={handleChange}
-            name="issueType"
-            value={formData.issueType[2]}
-            cid={2}
-          />
-          <label htmlFor="c3">Cleanliness Issue</label>
-          <br />
-          <input
-            type="checkbox"
-            id="c4"
-            onChange={handleChange}
-            name="issueType"
-            value={formData.issueType[3]}
-            cid={3}
-          />
-          <label htmlFor="c4">Water Leak</label>
-          <br />
-          <input
-            type="checkbox"
-            id="c5"
-            onChange={handleChange}
-            name="issueType"
-            value={formData.issueType[4]}
-            cid={4}
-          />
-          <label htmlFor="c5">Other</label>
-          <br />
         </article>
         <article>
           <p>Describe your issue </p>

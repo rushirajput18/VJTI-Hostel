@@ -42,8 +42,6 @@
         issueType,
         description,
       });
-      console.log('Received issueType:', issueType);
-
       const savedComplaint = await complaint.save();
       res.json(savedComplaint);
     } catch (error) {
@@ -51,5 +49,29 @@
       res.status(500).json({ error: 'Internal server error' });
     }
   });
+// Route 3: Delete a complaint by ID
+router.delete('/deletecomplaint/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Check if the complaint with the given ID exists
+    const existingComplaint = await Complaint.findById(id);
+    if (!existingComplaint) {
+      return res.status(404).json({ error: 'Complaint not found' });
+    }
+
+    // Delete the complaint
+    await existingComplaint.remove();
+     await existingComplaint.findByIdAndDelete(req.params.id)
+
+
+    res.json({ message: 'Complaint deleted successfully' });
+  } catch (error) {
+        console.log("Deleting process")
+
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
   module.exports = router;

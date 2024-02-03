@@ -30,6 +30,18 @@ const ComplaintList = ({ complaints, onComplaintClick, onDeleteClick }) => (
                 >
                   Show Details
                 </button>
+                <button
+                  onClick={() => onDeleteClick(complaint._id)}
+                  className="btn btn-danger"
+                  style={{
+                    whiteSpace: "nowrap",
+                    textTransform: "none",
+                    width: "124px",
+                    marginTop: "10px",
+                  }}
+                >
+                  Delete Complaint
+                </button>
               </div>
             </div>
           </div>
@@ -38,27 +50,66 @@ const ComplaintList = ({ complaints, onComplaintClick, onDeleteClick }) => (
     </div>
   </div>
 );
-const ComplaintDetails = ({ complaint }) => (
+const ComplaintDetails = ({ complaint, onHideDetailsClick }) => (
   <div className="complaint-details">
     <h2>Complaint Details</h2>
     <p>Name: {complaint.name}</p>
     <p>Block: {complaint.block}</p>
     <p>Room Number: {complaint.roomNumber}</p>
     <p>Mobile Number: {complaint.mobileNumber}</p>
-    <p>Email ID: {complaint.emailID}</p>
-    <p>Issue Type: {complaint.issueType.join(", ")}</p>
+    <p>Email ID: {complaint.email}</p>
+    <p>Issue Type: {complaint.issueType}</p>
     <p>Description: {complaint.description}</p>
+
+    <button
+      onClick={onHideDetailsClick}
+      className="btn btn-secondary"
+      style={{
+        whiteSpace: "nowrap",
+        textTransform: "none",
+        marginTop: "20px",
+        width: "150px",
+        backgroundColor: "gray",
+      }}
+    >
+      Hide Details
+    </button>
+
+   
   </div>
 );
 
 const Complaint = () => {
   // Assuming you have a list of complaints with their details
+  
   const [selectedComplaintIndex, setSelectedComplaintIndex] = useState(null);
   const [complaints, setComplaints] = useState([]);
-
+  const handleHideDetailsClick = () => {
+    setSelectedComplaintIndex(null);
+  };
   const handleComplaintClick = (index) => {
     setSelectedComplaintIndex(index);
   };
+  const handleDeleteClick = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/complaintsent/deletecomplaint/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        // If the deletion is successful, fetch the updated list of complaints
+        const updatedComplaints = await response.json();
+        setComplaints(updatedComplaints);
+        handleHideDetailsClick(); // Hide details after deletion
+      } else {
+        // Handle errors
+        console.error('Error deleting complaint');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   useEffect(() => {
     // Fetch all complaints from the backend when the component mounts
@@ -74,9 +125,13 @@ const Complaint = () => {
         <ComplaintList
           complaints={complaints}
           onComplaintClick={handleComplaintClick}
+          onDeleteClick={handleDeleteClick} 
         />
       ) : (
-        <ComplaintDetails complaint={complaints[selectedComplaintIndex]} />
+        <ComplaintDetails
+          complaint={complaints[selectedComplaintIndex]}
+          onHideDetailsClick={handleHideDetailsClick}
+        />
       )}
 
       <footer>
