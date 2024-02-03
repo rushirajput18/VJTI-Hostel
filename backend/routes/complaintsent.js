@@ -51,24 +51,16 @@
   });
 // Route 3: Delete a complaint by ID
 router.delete('/deletecomplaint/:id', async (req, res) => {
+  
   try {
-    const { id } = req.params;
+    const complaint = await Complaint.findByIdAndDelete(req.params.id);
 
-    // Check if the complaint with the given ID exists
-    const existingComplaint = await Complaint.findById(id);
-    if (!existingComplaint) {
-      return res.status(404).json({ error: 'Complaint not found' });
+    if (!complaint) {
+      return res.status(404).send('complaint not found');
     }
 
-    // Delete the complaint
-    await existingComplaint.remove();
-     await existingComplaint.findByIdAndDelete(req.params.id)
-
-
-    res.json({ message: 'Complaint deleted successfully' });
+    res.json({ success: 'complaint has been deleted', complaint });
   } catch (error) {
-        console.log("Deleting process")
-
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });
   }

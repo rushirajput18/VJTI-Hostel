@@ -1,8 +1,8 @@
 // Complaint.js
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./css/Complaint.css"; // Import the CSS file
+import axios from 'axios';
 
 const ComplaintList = ({ complaints, onComplaintClick, onDeleteClick }) => (
   <div className="complaint-list">
@@ -91,23 +91,11 @@ const Complaint = () => {
     setSelectedComplaintIndex(index);
   };
   const handleDeleteClick = async (id) => {
-    try {
-      const response = await fetch(`http://localhost:5000/api/complaintsent/deletecomplaint/${id}`, {
-        method: 'DELETE',
-      });
-
-      if (response.ok) {
-        // If the deletion is successful, fetch the updated list of complaints
-        const updatedComplaints = await response.json();
-        setComplaints(updatedComplaints);
-        handleHideDetailsClick(); // Hide details after deletion
-      } else {
-        // Handle errors
-        console.error('Error deleting complaint');
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    await axios.delete(`http://localhost:5000/api/complaintsent/deletecomplaint/${id}`)
+            .then(() => {
+                const newComplaints = complaints.filter((data) => data._id !== id);
+                setComplaints(newComplaints);
+            });
   };
 
 
