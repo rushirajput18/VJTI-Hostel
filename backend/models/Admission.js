@@ -12,4 +12,4 @@ const AdmissionSchema = new Schema({
   Hostel_Room_No: { type: String }
 });
 
-module.exports = mongoose.model('Students', StudentSchema);
+module.exports = mongoose.model('Admissions',AdmissionSchema);
