@@ -61,7 +61,7 @@ router.put('/updatestudent/:id', async (req, res) => {
 
     res.json(student);
   } catch (error) {
-    console.error(error);
+    // console.error(error.message);
     res.status(500).json({ error: 'Internal server error' });
   }
 });

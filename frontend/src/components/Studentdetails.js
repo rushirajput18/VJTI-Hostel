@@ -63,11 +63,14 @@ const Studentdetails = () => {
                 setDetails(newDetails);
             });
     };
-    const handleUpdate = async (e) => {
+    const handleUpdate = async (e, id) => {
         
         // Use the data from formData and selectedrow to perform the update
-        await axios.put(`http://localhost:5000/api/students/updatestudent/${selectedrow.Student_ID}`, formData);
-        
+        await axios.put(`http://localhost:5000/api/students/updatestudent/${id}`, formData);
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
         setIsUpdateFormVisible(false);
         window.location.reload();
     };
@@ -179,7 +182,7 @@ const Studentdetails = () => {
              {isUpdateFormVisible && (
             <div style={{ padding: '2rem', border: '2px solid green', display: 'flex', alignContent: 'flex-start' }}>
                 <h1 style={{ justifyContent: 'center' }}>Update Student Details</h1>
-                <form className='container' style={{ paddingBottom: '4rem' }} onSubmit={handleUpdate()}>
+                <form className='container' style={{ paddingBottom: '4rem' }} onSubmit={(e) => handleUpdate(e, selectedrow._id)}>
                     {/* ... (same form inputs as in the add new student form) */}
                     <div className="mb-3">
                         <label htmlFor="studentID" className="form-label">Student ID</label>
