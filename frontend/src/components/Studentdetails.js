@@ -57,6 +57,7 @@ const Studentdetails = () => {
 
     //3.DELETE
     const handleDelete = async (id) => {
+        setIsUpdateFormVisible(false)
         await axios.delete(`http://localhost:5000/api/students/deletestudent/${id}`)
             .then(() => {
                 const newDetails = details.filter((detail) => detail._id !== id);
@@ -67,14 +68,16 @@ const Studentdetails = () => {
         
         // Use the data from formData and selectedrow to perform the update
         await axios.put(`http://localhost:5000/api/students/updatestudent/${id}`, formData);
+        setIsUpdateFormVisible(false);
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
         });
-        setIsUpdateFormVisible(false);
         window.location.reload();
     };
-
+    const handleUpdate1 = () => {
+        setIsUpdateFormVisible(true);
+    }
     const [isFormVisible, setIsFormVisible] = useState(false);
 
     // Function to toggle the visibility of the form
@@ -110,7 +113,7 @@ const Studentdetails = () => {
             <td>{detail.Name}</td>
             <td>{detail.Phone_Number}</td>
             <td><i className="fa-solid fa-trash mx-2" onClick={() => handleDelete(detail._id)}></i></td>
-            <td><i className="fa-regular fa-pen-to-square mx-2" onClick={() => handleUpdate(detail._id)}></i></td>
+            <td><i className="fa-regular fa-pen-to-square mx-2" onClick={() => handleUpdate1()}></i></td>
           </tr>
         </tbody>
       ))}

@@ -52,7 +52,7 @@ router.put('/updatestudent/:id', async (req, res) => {
       Parent_Phone_Number,
       Hostel_Room_No,
     };
-
+    
     const student = await Student.findByIdAndUpdate(req.params.id, updatedStudent, { new: true });
 
     if (!student) {
