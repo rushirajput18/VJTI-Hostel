@@ -1,4 +1,4 @@
-dependency : MongoDB Compass, Nodejs
+dependency : MongoDB Compass, Nodejs, React
 1. git clone 
 2. cd VJTI-Hostel
 3. cd frontend
