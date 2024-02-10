@@ -5,11 +5,10 @@ import axios from 'axios';
 const Admission_recieved = () => {
     const [details, setDetails] = useState([]);
     //1. get all students admission data
-    useEffect(async () =>  {
-        await axios.post(
-            "http://localhost:5000/api/admission/addstudent")
-        .then((response) => response.json())
-        .then((data) => setDetails(data))
+    useEffect( () =>  {
+         axios.get(
+            "http://localhost:5000/api/admission/fetchallstudents")
+        .then((response) => setDetails(response.data))
         .catch((error) => console.error(error));
     }, []);
 
@@ -30,9 +29,9 @@ const Admission_recieved = () => {
                     <tbody key={detail._id}>
                         <tr >
                             <th scope="row">{index + 1}</th>
-                            <td>{detail.Student_ID}</td>
-                            <td>{detail.Name}</td>
-                            <td>{detail.Phone_Number}</td>
+                            <td>{detail.regId}</td>
+                            <td>{detail.fullName}</td>
+                            <td>{detail.mobileNumber}</td>
                             {/* <td><i className="fa-solid fa-trash mx-2" onClick={() => handleDelete(detail._id)}></i></td>
                             <td><i className="fa-regular fa-pen-to-square mx-2" onClick={() => handleUpdate1()}></i></td> */}
                         </tr>
