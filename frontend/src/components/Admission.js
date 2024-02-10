@@ -40,9 +40,10 @@ const Admission = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/admission/addstudent",
+        "http://localhost:5000/api/admission/addadmission",
         formData
       );
+console.log(response)
 console.log(formData)
       if (response.status === 200) {
         console.log("Complaint submitted successfully!");
@@ -65,7 +66,7 @@ console.log(formData)
         console.error("Failed to submit complaint");
       }
     } catch (error) {
-      console.log(formData)
+      console.log("Hi     " + formData)
 
       console.error("Error submitting complaint:", error);
     }
@@ -104,7 +105,7 @@ console.log(formData)
                   <i className="fas fa-envelope"></i>
                   <input
                     type="email"
-                    placeholder="Full Name"
+                    placeholder="Email"
                     required
                     onChange={handleChange}
                     name="email"
@@ -164,6 +165,7 @@ console.log(formData)
                   <input
                     type="number"
                     required
+                    placeholder="Mobile Number"
                     onChange={handleChange}
                     name="mobileNumber"
                     value={formData.mobileNumber}
@@ -174,6 +176,7 @@ console.log(formData)
                   <input
                     type="number"
                     required
+                    placeholder="Roll Number"
                     onChange={handleChange}
                     name="regId"
                     value={formData.regId}
@@ -184,6 +187,8 @@ console.log(formData)
                   <input
                     type="text"
                     required
+                    placeholder="Year Example Third Year"
+
                     onChange={handleChange}
                     name="year"
                     value={formData.year}
@@ -195,6 +200,7 @@ console.log(formData)
                     type="text"
                     required
                     onChange={handleChange}
+                    placeholder="Branch Example Information Technology"
                     name="branch"
                     value={formData.branch}
                   />
@@ -205,6 +211,8 @@ console.log(formData)
                     type="text"
                     required
                     onChange={handleChange}
+                    placeholder="Home City and Pincode Example Mumbai 400019"
+
                     name="homeAddress"
                     value={formData.homeAddress}
                   />

@@ -6,7 +6,7 @@ const Admissions = require('../models/Admission');
 // Route 1: Get all students
 router.get('/fetchallstudents', async (req, res) => {
   try {
-    const students = await Student.find();
+    const students = await Admissions.find();
     res.json(students);
   } catch (error) {
     console.error(error);
@@ -15,9 +15,9 @@ router.get('/fetchallstudents', async (req, res) => {
 });
 
 // Route 2: Add a new student
-router.post('/addstudent', async (req, res) => {
+router.post('/addadmission', async (req, res) => {
   try {
-    const { email, fullName,dateOfBirth, gender, mobileNumber, regId, year, branch,homeAddress,block } = req.body;
+    const { email, fullName, dateOfBirth, gender, mobileNumber, regId, year, branch, homeAddress, block } = req.body;
     const student = new Admissions({
       email,
       fullName,
@@ -28,8 +28,8 @@ router.post('/addstudent', async (req, res) => {
       year,
       branch,
       homeAddress,
-      block    });
-
+      block    
+    });
     const savedStudent = await student.save();
     res.json(savedStudent);
   } catch (error) {
