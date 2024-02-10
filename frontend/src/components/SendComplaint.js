@@ -69,13 +69,15 @@ const SendComplaint = () => {
           description: "",
           availability: "",
         });
-      } else {
+         // Refresh the page     
+         } else {
         // Handle errors, maybe show an error message
         console.error("Failed to submit complaint");
       }
     } catch (error) {
       console.error("Error submitting complaint:", error);
     }
+    
   };
   return (
     <section>

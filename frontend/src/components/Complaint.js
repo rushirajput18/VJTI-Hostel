@@ -23,7 +23,7 @@ const ComplaintList = ({ complaints, onComplaintClick, onDeleteClick }) => (
                   style={{
                     whiteSpace: "nowrap",
                     textTransform: "none",
-                    width: "124px",
+                    width: "157px",
                     paddingBottom: "10px",
                     backgroundColor: "purple",
                   }}
@@ -36,7 +36,7 @@ const ComplaintList = ({ complaints, onComplaintClick, onDeleteClick }) => (
                   style={{
                     whiteSpace: "nowrap",
                     textTransform: "none",
-                    width: "124px",
+                    width: "157px",
                     marginTop: "10px",
                   }}
                 >

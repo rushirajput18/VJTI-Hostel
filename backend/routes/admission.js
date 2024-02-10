@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Student = require('../models/Admission'); // Import your Student model here
+const Admissions = require('../models/Admission');
 
 // Route 1: Get all students
 router.get('/fetchallstudents', async (req, res) => {
@@ -16,18 +17,18 @@ router.get('/fetchallstudents', async (req, res) => {
 // Route 2: Add a new student
 router.post('/addstudent', async (req, res) => {
   try {
-    const { Student_ID, Name,Email, Gender, Home_Address, Phone_Number, Parent_Phone_Number, Hostel_Room_No } = req.body;
-    
-    const student = new Student({
-      Student_ID,
-      Name,
-      Email,
-      Gender,
-      Home_Address,
-      Phone_Number,
-      Parent_Phone_Number,
-      Hostel_Room_No,
-    });
+    const { email, fullName,dateOfBirth, gender, mobileNumber, regId, year, branch,homeAddress,block } = req.body;
+    const student = new Admissions({
+      email,
+      fullName,
+      dateOfBirth,
+      gender,
+      mobileNumber,
+      regId,
+      year,
+      branch,
+      homeAddress,
+      block    });
 
     const savedStudent = await student.save();
     res.json(savedStudent);

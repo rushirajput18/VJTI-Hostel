@@ -2,14 +2,16 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const AdmissionSchema = new Schema({
-  Student_ID: { type: Number, required: true, unique: true },
-  Name: { type: String, required: true },
-  Email:{type: String},
-  Gender: { type: String },
-  Home_City: { type: String },
-  Phone_Number: { type: String },
-  Parent_Phone_Number: { type: String },
-  Hostel_Room_No: { type: String }
+  email:{type: String, required:true},
+  fullName: { type: String, required: true },
+  dateOfBirth:{type: Date, required: true },
+  gender:{type: String, required: true},
+  mobileNumber:{type: Number, required: true},
+  regId: { type: Number, required: true },
+  year:{type: String, required: true},
+  branch:{type: String, required: true},
+  homeAddress:{type: String, required: true},
+  block:{type: String, required: true}
 });
 
 module.exports = mongoose.model('Admissions',AdmissionSchema);

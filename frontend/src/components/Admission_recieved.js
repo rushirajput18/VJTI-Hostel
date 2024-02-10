@@ -5,14 +5,12 @@ import axios from 'axios';
 const Admission_recieved = () => {
     const [details, setDetails] = useState([]);
     //1. get all students admission data
-    useEffect(() => {
-        axios.get('http://localhost:5000/api/admission/fetchallstudents')
-            .then((response) => {
-                setDetails(response.data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+    useEffect(async () =>  {
+        await axios.post(
+            "http://localhost:5000/api/admission/addstudent")
+        .then((response) => response.json())
+        .then((data) => setDetails(data))
+        .catch((error) => console.error(error));
     }, []);
 
     return (

@@ -1,44 +1,88 @@
-import React, { useRef } from "react";
-import { usePDF } from "react-to-pdf";
+import React, { useState } from "react";
+// import { usePDF } from "react-to-pdf";
 import "./css/Admission.css";
 import img from "./Images/admission.jpg";
+import axios from "axios";
 
 const Admission = () => {
-  const { toPDF, targetRef } = usePDF({ filename: "admission_form.pdf" });
-  const emailRef = useRef(null);
-  const fullNameRef = useRef(null);
-  const dateOfBirthRef = useRef(null);
-  const genderRef = useRef(null);
-  const mobileNumberRef = useRef(null);
-  const regIdRef = useRef(null);
-  const yearRef = useRef(null);
-  const branchRef = useRef(null);
-  const homeAddressRef = useRef(null);
-  const blockRef = useRef(null);
+  // const { toPDF, targetRef } = usePDF({ filename: "admission_form.pdf" });
+  const [formData, setFormData] = useState({
+    email: "",
+    fullName: "",
+    dateOfBirth: "",
+    gender: "",
+    mobileNumber: "",
+    regId: "",
+    year: "",
+    branch: "",
+    homeAddress: "",
+    block: "",
+  });
+  // const emailRef = useRef(null);
+  // const fullNameRef = useRef(null);
+  // const dateOfBirthRef = useRef(null);
+  // const genderRef = useRef(null);
+  // const mobileNumberRef = useRef(null);
+  // const regIdRef = useRef(null);
+  // const yearRef = useRef(null);
+  // const branchRef = useRef(null);
+  // const homeAddressRef = useRef(null);
+  // const blockRef = useRef(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Retrieve values from the form fields
-    const data = {
-      email: emailRef.current.value,
-      fullName: fullNameRef.current.value,
-      dateOfBirth: dateOfBirthRef.current.value,
-      gender: genderRef.current.value,
-      mobileNumber: mobileNumberRef.current.value,
-      regId: regIdRef.current.value,
-      year: yearRef.current.value,
-      branch: branchRef.current.value,
-      homeAddress: homeAddressRef.current.value,
-      block: blockRef.current.value,
-    };
-
-    // Log the data to the console (you can modify this part to suit your needs)
-    console.log("Form Data:", data);
-
-    // Generate PDF
-    toPDF();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/admission/addstudent",
+        formData
+      );
+console.log(formData)
+      if (response.status === 200) {
+        console.log("Complaint submitted successfully!");
+        // Reset the form after successful submission
+        setFormData({
+          email: "",
+          fullName: "",
+          dateOfBirth: "",
+          gender: "",
+          mobileNumber: "",
+          regId: "",
+          year: "",
+          branch: "",
+          homeAddress: "",
+          block: "",
+        });
+        // Refresh the page if needed
+      } else {
+        // Handle errors, maybe show an error message
+        console.error("Failed to submit complaint");
+      }
+    } catch (error) {
+      console.log(formData)
+
+      console.error("Error submitting complaint:", error);
+    }
+  };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   // Retrieve values from the form fields
+  //
+
+  //   // Log the data to the console (you can modify this part to suit your needs)
+  //   console.log("Form Data:", data);
+
+  //   // Generate PDF
+  //   toPDF();
+  // };
   return (
     <div id="admission" className="container">
       <input type="checkbox" id="flip" />
@@ -59,10 +103,12 @@ const Admission = () => {
                 <div className="input-box">
                   <i className="fas fa-envelope"></i>
                   <input
-                    type="text"
-                    placeholder="Email"
-                    ref={emailRef}
+                    type="email"
+                    placeholder="Full Name"
                     required
+                    onChange={handleChange}
+                    name="email"
+                    value={formData.email}
                   />
                 </div>
                 <div className="input-box">
@@ -70,90 +116,119 @@ const Admission = () => {
                   <input
                     type="text"
                     placeholder="Full Name"
-                    ref={fullNameRef}
                     required
+                    onChange={handleChange}
+                    name="fullName"
+                    value={formData.fullName}
                   />
                 </div>
                 <div className="input-box">
                   <i className="fas fa-calendar-alt" />
 
-                  <input ref={dateOfBirthRef} type="date" />
+                  <input
+                    type="date"
+                    required
+                    placeholder="Date Of Birth"
+                    onChange={handleChange}
+                    name="dateOfBirth"
+                    value={formData.dateOfBirth}
+                  />
                 </div>
                 <div className="input-box">
-                  <input
-                    ref={genderRef}
-                    type="radio"
-                    name="gender"
-                    value="male"
-                  />{" "}
-                  Male
-                  <input
-                    ref={genderRef}
-                    type="radio"
-                    name="gender"
-                    value="female"
-                  />{" "}
-                  Female
+                  <label>
+                    <input
+                      type="radio"
+                      required
+                      onChange={handleChange}
+                      name="gender"
+                      value="Male"
+                      checked={formData.gender === "Male"}
+                    />
+                    Male
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      required
+                      onChange={handleChange}
+                      name="gender"
+                      value="Female"
+                      checked={formData.gender === "Female"}
+                    />
+                    Female
+                  </label>
                 </div>
+
                 <div className="input-box">
                   <i className="fas fa-mobile-alt"></i>
                   <input
-                    ref={mobileNumberRef}
                     type="number"
-                    placeholder="Mobile Number"
                     required
+                    onChange={handleChange}
+                    name="mobileNumber"
+                    value={formData.mobileNumber}
                   />
                 </div>
                 <div className="input-box">
                   <i className="fas fa-id-card"></i>
                   <input
-                    ref={regIdRef}
-                    type="text"
-                    placeholder="Reg ID"
+                    type="number"
                     required
+                    onChange={handleChange}
+                    name="regId"
+                    value={formData.regId}
                   />
                 </div>
                 <div className="input-box">
                   <i className="fas fa-book"></i>
                   <input
-                    ref={yearRef}
                     type="text"
-                    placeholder="Year"
                     required
+                    onChange={handleChange}
+                    name="year"
+                    value={formData.year}
                   />
                 </div>
                 <div className="input-box">
                   <i className="fas fa-book"></i>
                   <input
-                    ref={branchRef}
                     type="text"
-                    placeholder="Branch"
                     required
+                    onChange={handleChange}
+                    name="branch"
+                    value={formData.branch}
                   />
                 </div>
                 <div className="input-box">
                   <i className="fas fa-map-marker-alt"></i>
                   <input
-                    ref={homeAddressRef}
                     type="text"
-                    placeholder="Home Address"
                     required
+                    onChange={handleChange}
+                    name="homeAddress"
+                    value={formData.homeAddress}
                   />
                 </div>
                 <div className="input-box">
                   <label className="form-label select-label">
                     Choose Block
                   </label>
-                  <select ref={blockRef}>
-                    <option value="1" disabled>
+                  <select
+                    required
+                    onChange={handleChange}
+                    name="block"
+                    value={formData.block}
+                  >
+                    <option value="" disabled>
                       Choose Block
                     </option>
-                    <option value="2">Block-A</option>
-                    <option value="3">Block-B</option>
-                    <option value="4">Block-C</option>
-                    <option value="4">Block-D</option>
+                    <option value="Block-A">Block-A</option>
+                    <option value="Block-B">Block-B</option>
+                    <option value="Block-C">Block-C</option>
+                    <option value="Block-D">Block-D</option>
                   </select>
                 </div>
+
                 <div className="button input-box">
                   <input type="submit" value="Submit" />
                 </div>
