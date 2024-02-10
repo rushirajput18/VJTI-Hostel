@@ -40,17 +40,16 @@ const Navbar = () => {
               </li>
               {isLoggedIn && (
                 <>
-                 <li className="nav-item">
+                  <li className="nav-item">
                     <Link className="nav-link" to="/admission">
-                     Admission
+                      Admission
                     </Link>
                   </li>
-                 
                   <li className="nav-item">
-                <Link className="nav-link" to="https://rzp.io/l/wVrc0Ngo5">
-                  Fees Payment
-                </Link>
-              </li>
+                    <a className="nav-link" href="https://rzp.io/l/wVrc0Ngo5">
+                      Fees Payment
+                    </a>
+                  </li>
                   <li className="nav-item">
                     <Link className="nav-link" to="/sendcomplaint">
                       Send Complaint
@@ -87,12 +86,11 @@ const Navbar = () => {
             </ul>
             {!isLoggedIn ? (
               <form className="d-flex" role="search">
-                <Link className="btn mx-1" to="/login" role="button" style={{ backgroundColor: '#7d2ae8', color: 'white' }}>Student Login</Link>
-                <Link className="btn mx-1" role="button" onClick={handleRedirectToLocalhost3001} style={{ backgroundColor: '#7d2ae8', color: 'white' }}>Admin Login</Link>
+                <Link className="btn mx-1" to="/login" role="button">Student Login</Link>
+                <Link className="btn mx-1" role="button" onClick={handleRedirectToLocalhost3001}>Admin Login</Link>
               </form>
             ) : (
-              <button onClick={handleLogout} className="btn my-2" to="/login" role="button" style={{ width:'auto', backgroundColor: '#7d2ae8', color: 'white' }}>Logout</button>
-              
+              <button onClick={handleLogout} className="btn my-1" to="/login" role="button">Logout</button>
             )}
           </div>
         </div>

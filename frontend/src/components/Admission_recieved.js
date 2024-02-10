@@ -1,46 +1,117 @@
-import React,{ useState, useEffect } from 'react'
+// Complaint.js
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "./css/Complaint.css"; // Import the CSS file
 import axios from 'axios';
 
+const ComplaintList = ({ complaints, onComplaintClick }) => (
+  <div className="complaint-list">
+    <h2 style={{ marginLeft: "200px" }}>Complaints</h2>
+    <div className="complaint-cards">
+      <div className="row">
+        {complaints.map((complaint, index) => (
+          <div className="col-md-6" key={index}>
+            <div className="card my-3" style={{ width: "18rem" }}>
+              <div className="card-body">
+                <h5 className="card-title">{complaint.name}</h5>
+                <p className="card-text">
+                  {complaint.block}-{complaint.roomNumber}
+                </p>
+                <button
+                  onClick={() => onComplaintClick(index)}
+                  className="btn btn-primary"
+                  style={{
+                    whiteSpace: "nowrap",
+                    textTransform: "none",
+                    width: "157px",
+                    paddingBottom: "10px",
+                    backgroundColor: "purple",
+                  }}
+                >
+                  Show Details
+                </button>
+                
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+const AdmissionDetails = ({ admission, onHideDetailsClick }) => (
+  <div className="complaint-details">    
+    <h2>Complaint Details</h2>
+    <p>ID: {admission.regId}</p>
+    <p>Email: {admission.email}</p>
+    <p>Name: {admission.fullName}</p>
+    <p>DOB: {admission.dateOfBirth}</p>
+    <p>Gender: {admission.gender}</p>
+    <p>Block: {admission.block}</p>
+    <p>Branch: {admission.branch}</p>
+    <p>Mobile Number: {admission.mobileNumber}</p>
+    <p>Year: {admission.year}</p>
+    <p>Home Address: {admission.homeAddress}</p>
 
-const Admission_recieved = () => {
-    const [details, setDetails] = useState([]);
-    //1. get all students admission data
-    useEffect(async () =>  {
-        await axios.post(
-            "http://localhost:5000/api/admission/addstudent")
-        .then((response) => response.json())
-        .then((data) => setDetails(data))
-        .catch((error) => console.error(error));
-    }, []);
+    <button
+      onClick={onHideDetailsClick}
+      className="btn btn-secondary"
+      style={{
+        whiteSpace: "nowrap",
+        textTransform: "none",
+        marginTop: "20px",
+        width: "150px",
+        backgroundColor: "gray",
+      }}
+    >
+      Hide Details
+    </button>
 
-    return (
-        <>
-            <table className="table table-dark table-striped container" style={{ flex: 1, width: '50%', height: '50%', float: 'left' }}>
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Registration No.</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Contact No.</th>
-                        {/* <th scope="col">Delete</th>
-                        <th scope="col">Update</th> */}
-                    </tr>
-                </thead>
-                {details.map((detail, index) => (
-                    <tbody key={detail._id}>
-                        <tr >
-                            <th scope="row">{index + 1}</th>
-                            <td>{detail.Student_ID}</td>
-                            <td>{detail.Name}</td>
-                            <td>{detail.Phone_Number}</td>
-                            {/* <td><i className="fa-solid fa-trash mx-2" onClick={() => handleDelete(detail._id)}></i></td>
-                            <td><i className="fa-regular fa-pen-to-square mx-2" onClick={() => handleUpdate1()}></i></td> */}
-                        </tr>
-                    </tbody>
-                ))}
-            </table>
-        </>
-    )
-}
+   
+  </div>
+);
 
-export default Admission_recieved
+const Admission_received = () => {
+  // Assuming you have a list of complaints with their details
+  
+  const [selectedComplaintIndex, setSelectedComplaintIndex] = useState(null);
+  const [complaints, setComplaints] = useState([]);
+  const handleHideDetailsClick = () => {
+    setSelectedComplaintIndex(null);
+  };
+  const handleAdmissionClick = (index) => {
+    setSelectedComplaintIndex(index);
+  };
+ 
+
+
+  useEffect(() => {
+    // Fetch all complaints from the backend when the component mounts
+    fetch("http://localhost:5000/api/admission/fetchallstudents")
+      .then((response) => response.json())
+      .then((data) => setComplaints(data))
+      .catch((error) => console.error(error));
+  }, []); // Empty dependency array ensures this runs only once after initial render
+
+  return (
+    <section className="complaint-section">
+      {selectedComplaintIndex === null ? (
+        <ComplaintList
+          complaints={complaints}
+          onComplaintClick={handleAdmissionClick}
+        />
+      ) : (
+        <AdmissionDetails
+          complaint={complaints[selectedComplaintIndex]}
+          onHideDetailsClick={handleHideDetailsClick}
+        />
+      )}
+
+      <footer>
+        <Link to="/">Back to Complaints</Link>
+      </footer>
+    </section>
+  );
+};
+
+export default Admission_received;

@@ -27,15 +27,13 @@ const About = () => {
                     <h2>Chief Rector - Hostel</h2>
                     <h3>Dr. A. N. Bambole</h3>
                     <p>
-                        Professor, Structural Engineering Department
-                        Veermata Jijabai Technological Institute, Mumbai, INDIA
-                        anbambole[AT]st.vjti.ac.in
-                        Visiting Professor, Mechanical Engineering Department, (November 2017 to January 2018)
-                        Texas A  M University, Colleges Station, TX, USA
+                   <b>Professor</b> at Structural Engineering Department, <br/>
+                    Veermata Jijabai Technological Institute, Mumbai<br/>
                     </p>
                     <div className="contact-info">
-                        <p>Email: anbambole@st.vjti.ac.in</p>
-                        <p>Phone: +91 9876543210</p>
+                       <b>anbambole@st.vjti.ac.in</b>  <br/>
+
+                       <b>+91 9876543210</b>
                     </div>
                 </div>
                 <div className="about-image">
@@ -47,14 +45,13 @@ const About = () => {
                     <h2>Rector - Hostel</h2>
                     <h3>Dr. Vinod B. Suryawanshi</h3>
                     <p>
-                    Assistant Professor, Mechanical Engineering Department,
-Veermata Jijabai Technological Institute (VJTI), Mumbai
-Phone (Office): 022-24198223, Mobile: 7506111219
+                    <b>Assistant Professor</b> at Mechanical Engineering Department, <br/>
+Veermata Jijabai Technological Institute, Mumbai <br/>
 
                     </p>
                     <div className="contact-info">
-                        <p>Email: anbambole@st.vjti.ac.in</p>
-                        <p>Phone: +91 9876543210</p>
+                       <b> vbsuryawanshi@me.vjti.ac.in </b> <br/>
+                       <b>+91 9876543210 </b> 
                     </div>
                 </div>
                 <div className="about-image">

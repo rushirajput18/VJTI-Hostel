@@ -7,6 +7,7 @@ const Admissions = require('../models/Admission');
 router.get('/fetchallstudents', async (req, res) => {
   try {
     const students = await Admissions.find();
+    console.log(students)
     res.json(students);
   } catch (error) {
     console.error(error);
