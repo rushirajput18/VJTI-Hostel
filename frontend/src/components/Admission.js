@@ -4,6 +4,7 @@ import "./css/Admission.css";
 import img from "./Images/admission.jpg";
 import axios from "axios";
 
+
 const Admission = () => {
   // const { toPDF, targetRef } = usePDF({ filename: "admission_form.pdf" });
   const [formData, setFormData] = useState({
@@ -16,7 +17,6 @@ const Admission = () => {
     year: "",
     branch: "",
     homeAddress: "",
-    block: "",
   });
   // const emailRef = useRef(null);
   // const fullNameRef = useRef(null);
@@ -43,8 +43,6 @@ const Admission = () => {
         "http://localhost:5000/api/admission/addadmission",
         formData
       );
-console.log(response)
-console.log(formData)
       if (response.status === 200) {
         console.log("Complaint submitted successfully!");
         // Reset the form after successful submission
@@ -58,7 +56,6 @@ console.log(formData)
           year: "",
           branch: "",
           homeAddress: "",
-          block: "",
         });
         // Refresh the page if needed
       } else {
@@ -66,8 +63,6 @@ console.log(formData)
         console.error("Failed to submit complaint");
       }
     } catch (error) {
-      console.log("Hi     " + formData)
-
       console.error("Error submitting complaint:", error);
     }
   };
@@ -133,7 +128,7 @@ console.log(formData)
                     onChange={handleChange}
                     name="dateOfBirth"
                     value={formData.dateOfBirth}
-                  />
+                    />
                 </div>
                 <div className="input-box">
                   <label>
@@ -187,7 +182,7 @@ console.log(formData)
                   <input
                     type="text"
                     required
-                    placeholder="Year Example Third Year"
+                    placeholder="College Year "
 
                     onChange={handleChange}
                     name="year"
@@ -200,7 +195,7 @@ console.log(formData)
                     type="text"
                     required
                     onChange={handleChange}
-                    placeholder="Branch Example Information Technology"
+                    placeholder="Branch (Example IT)"
                     name="branch"
                     value={formData.branch}
                   />
@@ -211,32 +206,13 @@ console.log(formData)
                     type="text"
                     required
                     onChange={handleChange}
-                    placeholder="Home City and Pincode Example Mumbai 400019"
+                    placeholder="Home City"
 
                     name="homeAddress"
                     value={formData.homeAddress}
                   />
                 </div>
-                <div className="input-box">
-                  <label className="form-label select-label">
-                    Choose Block
-                  </label>
-                  <select
-                    required
-                    onChange={handleChange}
-                    name="block"
-                    value={formData.block}
-                  >
-                    <option value="" disabled>
-                      Choose Block
-                    </option>
-                    <option value="Block-A">Block-A</option>
-                    <option value="Block-B">Block-B</option>
-                    <option value="Block-C">Block-C</option>
-                    <option value="Block-D">Block-D</option>
-                  </select>
-                </div>
-
+              
                 <div className="button input-box">
                   <input type="submit" value="Submit" />
                 </div>

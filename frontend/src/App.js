@@ -12,7 +12,8 @@ import Studentdetails from './components/Studentdetails';
 import Facilities from './components/Facilities';
 import Complaint from './components/Complaint';
 import SendComplaint from './components/SendComplaint';
-import Admission_recieved from './components/Admission_recieved';
+import AdmissionReceived from './components/AdmissionReceived';
+import AboutVJTI from './components/AboutVJTI';
 function App() {
  
   const [alert, setAlert] = useState(null);
@@ -43,7 +44,8 @@ function App() {
       <Route exact path="/studentNotice" element= {<StudentNotice 
       showAlert={showAlert}/>}/>
       <Route exact path="/Studentdetails" element={<Studentdetails />}/>
-      <Route exact path="/admission_recieved" element={<Admission_recieved />}/>
+      <Route exact path="/admissionreceived" element={<AdmissionReceived />}/>
+      <Route exact path="/aboutvjti" element={<AboutVJTI />}/>
       </Routes>
       </div>
     </Router>

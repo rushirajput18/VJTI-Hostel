@@ -56,8 +56,8 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/Studentdetails">
-                      Student Details
+                    <Link className="nav-link" to="/aboutvjti">
+                      About VJTI Hostel
                     </Link>
                   </li>
                   <li className="nav-item dropdown">
@@ -77,8 +77,15 @@ const Navbar = () => {
                         </Link>
                       </li>
                       <li>
-                        <hr className="dropdown-divider" />
+                        <Link className="dropdown-item" to="/admissionreceived">
+                          Admission Received
+                        </Link>
                       </li>
+                      <li >
+                    <Link className="dropdown-item"  to="/Studentdetails">
+                      Student Details
+                    </Link>
+                  </li>
                     </ul>
                   </li>
                 </>

@@ -1,0 +1,29 @@
+.ID {
+    border: 2px solid blue;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.Branch {
+    border: 2px solid green;
+    border-radius: 5px;
+    padding: 5px;
+}
+button{
+    width: 110px;
+}
+button:hover{
+    background-color: bisque;
+    color: black;
+}
+.Year {
+    border: 2px solid orange;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.Gender {
+    border: 2px solid purple;
+    border-radius: 5px;
+    padding: 5px;
+}
