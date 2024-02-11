@@ -11,7 +11,8 @@ const AdmissionSchema = new Schema({
   year:{type: String, required: true},
   branch:{type: String, required: true},
   homeAddress:{type: String, required: true},
-  block:{type: String, required: true}
+  block:{type: String, required: true},
+  status:{type: String}
 });
 
 module.exports = mongoose.model('Admissions',AdmissionSchema);
