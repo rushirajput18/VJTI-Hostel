@@ -7,61 +7,77 @@ const AdmissionReceived = () => {
     const [details, setDetails] = useState([]);
     const [searchId, setSearchId] = useState('');
     const [searchCategory, setSearchCategory] = useState('ID');
-
+    const [selectedStatus, setSelectedStatus] = useState(''); //to change status in backend
+    const [selectedStudentId, setSelectedStudentId] = useState('');
+    const [selectedrow, setSelectedrow] = useState({ email: "", fullName: "", dateOfBirth: "", gender: "", mobileNumber: "", regId: "", year: "", branch: "", homeAddress: "", block: "", status: "" });
+    const [showCard, setShowCard] = useState(false);
     useEffect(() => {
-        axios.get("http://localhost:5000/api/admission/fetchallstudents")
-            .then((response) => {
-                setOriginalDetails(response.data);
-                setDetails(response.data);
-            })
+        axios.get(
+            "http://localhost:5000/api/admission/fetchallstudents")
+            .then((response) => setDetails(response.data))
             .catch((error) => console.error(error));
     }, []);
+    const handleStatusChange = (status) => {
+        setSelectedStatus(status);
+    };
 
     const formatDate = (dateString) => {
         const dateObject = new Date(dateString);
         return dateObject.toISOString().split('T')[0];
     };
+    const handleUpdateStatus = async () => {
+
+        try {
+            await axios.put(`http://localhost:5000/api/admission/updatestudent/${selectedStudentId}`, { status: selectedStatus });
+            // Refresh the data after updating status
+            // axios.get("http://localhost:5000/api/admission/fetchallstudents")
+            //     .then((response) => setDetails(response.data))
+            //     .catch((error) => console.error(error));
+        } catch (error) {
+            console.error('Error updating status:', error);
+        }
+
+    };
 
     const handleSearch = () => {
         if (!searchId.trim()) {
-            alert('Please enter a search term.');
+            alert('Please enter an ID to search.');
             return;
         }
-
-        // Trim the search term
-        const trimmedSearchTerm = searchId.trim().toLowerCase();
-
-        // Filter originalDetails based on search term and category
-        const filteredDetails = originalDetails.filter(detail => {
-            if (searchCategory === 'ID') {
-                return String(detail.regId).includes(trimmedSearchTerm);
-            } else if (searchCategory === 'Branch') {
-                return detail.branch.toLowerCase().includes(trimmedSearchTerm);
-            } else if (searchCategory === 'Year') {
-                return detail.year.toLowerCase().includes(trimmedSearchTerm);
-            } else if (searchCategory === 'Gender') {
-                return detail.gender.toLowerCase().includes(trimmedSearchTerm);
-            }
-            return false;
-        });
-
+        
+        // Trim the search ID
+        const trimmedSearchId = searchId.trim();
+        
+        console.log("Searching for ID:", trimmedSearchId);
+        console.log("Original details:", originalDetails);
+    
+        // Filter originalDetails based on searchId
+        const filteredDetails = originalDetails.filter(detail => String(detail.regId).trim() === trimmedSearchId);
+    
+        console.log("Filtered details:", filteredDetails);
+    
         if (filteredDetails.length === 0) {
-            alert('No student found with the provided search term.');
+            alert('No student found with the provided ID.');
         } else {
             setDetails(filteredDetails);
+            console.log(filteredDetails.map(detail => detail.regId)); // Log regId of each detail
         }
     };
-
     const handleReset = () => {
         setDetails(originalDetails);
         setSearchId('');
     };
-
+    const handleUpdateStatusClick = (detail) => { //when clicked on update button
+        setShowCard(true);
+        setSelectedrow(detail);
+        setSelectedStudentId(detail._id)
+        console.log(detail._id)
+    }
     return (
         <div style={{ marginTop: '20px', marginLeft: '170px' }}>
             <h2>Admission Received</h2>
             <div style={{ marginBottom: '10px' }}>
-                <select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)}>
+            <select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)}>
                     <option value="ID">ID</option>
                     <option value="Branch">Branch</option>
                     <option value="Year">Year</option>
@@ -77,19 +93,24 @@ const AdmissionReceived = () => {
                 <button onClick={handleSearch}>Search</button>
                 <button onClick={handleReset}>Reset</button>
             </div>
-            <table className="table table-dark table-striped" style={{ width: '100%' }}>
+            <table className="table table-dark table-striped container" style={{ flex: 1, width: '50%', height: '50%', float: 'left' }}>
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>D.O.B</th>
-                        <th>Gender</th>
-                        <th>Mobile Number</th>
-                        <th>Year</th>
-                        <th>Branch</th>
-                        <th>Home City</th>
+                        <th scope="col">#</th>
+                        <th scope="col">Registration No.</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">D.O.B</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Mobile No.</th>
+                        <th scope="col">Year</th>
+                        <th scope="col">Branch</th>
+                        <th scope="col">Home Address</th>
+                        <th scope="col">Block</th>
+                        <th scope="col">Current Status</th>
+                        <th scope="col">Update Status</th>
+                        {/* <th scope="col">Delete</th>
+                        <th scope="col">Update</th> */}
                     </tr>
                 </thead>
                 <tbody>
@@ -109,8 +130,68 @@ const AdmissionReceived = () => {
                     ))}
                 </tbody>
             </table>
+            {showCard && (
+                <div className="card mt-4">
+                    <div className="card-body">
+                        <h5 className="card-title">Update Allotment Status of {selectedrow.fullName}</h5>
+
+                        <form className='container' style={{ paddingBottom: '4rem' }} onSubmit={handleUpdateStatus}>
+                            <div className="form-check">
+                                <input
+                                    type="radio"
+                                    name="status"
+                                    id="Alloted"
+                                    value="Alloted"
+                                    // checked={selectedStatus === 'A'}
+                                    onChange={() => handleStatusChange('Alloted')}
+                                    className="form-check-input"
+                                />
+                                <label htmlFor="Alloted" className="form-check-label">
+                                    Alloted
+                                </label>
+                            </div>
+
+                            <div className="form-check">
+                                <input
+                                    type="radio"
+                                    name="status"
+                                    id="Waitlisted"
+                                    value="Waitlisted"
+                                    // checked={selectedStatus === 'B'}
+                                    onChange={() => handleStatusChange('Waitlisted')}
+                                    className="form-check-input"
+                                />
+                                <label htmlFor="Waitlisted" className="form-check-label">
+                                    Waitlisted
+                                </label>
+                            </div>
+
+                            <div className="form-check">
+                                <input
+                                    type="radio"
+                                    name="status"
+                                    id="Rejected"
+                                    value="Rejected"
+                                    // checked={selectedStatus === 'C'}
+                                    onChange={() => handleStatusChange('Rejected')}
+                                    className="form-check-input"
+                                />
+                                <label htmlFor="Rejected" className="form-check-label">
+                                    Rejected
+                                </label>
+                            </div>
+
+                            <button type="submit" className="btn btn-primary mt-3" onClick={() => handleUpdateStatus()}>
+                                Submit
+                            </button>
+                        </form>
+
+
+                    </div>
+                </div>
+            )}
         </div>
     );
-};
+}
 
 export default AdmissionReceived;

@@ -38,34 +38,27 @@ router.post('/addadmission', async (req, res) => {
   }
 });
 
-// // Route 3: Update an existing student
-// router.put('/updatestudent/:id', async (req, res) => {
-//   const { Student_ID, Name, Email, Gender, Home_Address, Phone_Number, Parent_Phone_Number, Hostel_Room_No } = req.body;
+// Route 3: Update an existing student
+router.put('/updatestudent/:id', async (req, res) => {
+  const {status } = req.body;
 
-//   try {
-//     const updatedStudent = {
-//       Student_ID,
-//       Name,
-//       Email,
-//       Gender,
-//       Home_Address,
-//       Phone_Number,
-//       Parent_Phone_Number,
-//       Hostel_Room_No,
-//     };
+  try {
+    const updatedStudent = {
+      status
+    };
     
-//     const student = await Student.findByIdAndUpdate(req.params.id, updatedStudent, { new: true });
+    const student = await Student.findByIdAndUpdate(req.params.id, updatedStudent, { new: true });
 
-//     if (!student) {
-//       return res.status(404).send('Student not found');
-//     }
+    if (!student) {
+      return res.status(404).send('Student not found');
+    }
 
-//     res.json(student);
-//   } catch (error) {
-//     // console.error(error.message);
-//     res.status(500).json({ error: 'Internal server error' });
-//   }
-// });
+    res.json(student);
+  } catch (error) {
+    // console.error(error.message);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 // // Route 4: Delete an existing student
 // router.delete('/deletestudent/:id', async (req, res) => {
