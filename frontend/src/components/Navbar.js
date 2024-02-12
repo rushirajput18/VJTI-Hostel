@@ -93,11 +93,13 @@ const Navbar = () => {
             </ul>
             {!isLoggedIn ? (
               <form className="d-flex" role="search">
-                <Link className="btn mx-1" to="/login" role="button">Student Login</Link>
-                <Link className="btn mx-1" role="button" onClick={handleRedirectToLocalhost3001}>Admin Login</Link>
+
+                <Link className="link" to="/login" role="button">Student Login</Link>
+                <Link className="link" role="button" onClick={handleRedirectToLocalhost3001}>Admin Login</Link>
               </form>
             ) : (
-              <button onClick={handleLogout} className="btn my-1" to="/login" role="button">Logout</button>
+              <button className="logout" onClick={handleLogout} to="/login" role="button">Logout</button>
+
             )}
           </div>
         </div>

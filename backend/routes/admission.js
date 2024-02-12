@@ -28,7 +28,7 @@ router.post('/addadmission', async (req, res) => {
       year,
       branch,
       homeAddress,
-         
+
     });
     const savedStudent = await student.save();
     res.json(savedStudent);

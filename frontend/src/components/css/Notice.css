@@ -45,14 +45,14 @@
 
   }
   
-  .div6 li::before {
+  /* .div6 li::before {
     content: '\2022';
     color: black;
     font-size: 1.5em;
     position: absolute;
     left: -1.5em;
   }
-  
+   */
   .div ul {
     padding-bottom: 20px;
   }
@@ -65,7 +65,19 @@
   a:hover {
     color: black;
   }
-  
+  .link{
+    display: block;
+    width: 149px;
+    padding: 3px 0px 1px 16px;
+    margin: 0px 32px 0px 0px;
+    border-radius: 4px;
+    height:30px;
+    color: white;
+    font-size: 18px;
+    float: right;
+    border: none;
+    background-color: rosybrown;
+  }
   .footer {
     background-color: #f1c40f;
     color: rgb(23, 3, 3);
@@ -75,4 +87,21 @@
     font-size: 25px;
     display: inline-block;
   }
+  .notice-list {
+    list-style-type: none; /* Remove default list styles */
+    padding-left: 0; /* Remove default padding */
+  }
   
+  .notice-list li {
+    margin-bottom: 10px; /* Add space between list items */
+  }
+  
+  .notice-list a {
+    text-decoration: none; /* Remove default underline */
+    color: #333; /* Set text color */
+  }
+  
+  .arrow {
+    margin-right: 5px; /* Add space between arrow and text */
+    font-size: 16px; /* Adjust arrow size */
+  }
