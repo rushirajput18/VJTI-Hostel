@@ -17,7 +17,7 @@ router.get('/fetchallstudents', async (req, res) => {
 // Route 2: Add a new student
 router.post('/addadmission', async (req, res) => {
   try {
-    const { email, fullName, dateOfBirth, gender, mobileNumber, regId, year, branch, homeAddress, block } = req.body;
+    const { email, fullName, dateOfBirth, gender, mobileNumber, regId, year, branch, homeAddress } = req.body;
     const student = new Admissions({
       email,
       fullName,
@@ -28,7 +28,6 @@ router.post('/addadmission', async (req, res) => {
       year,
       branch,
       homeAddress,
-      block    
     });
     const savedStudent = await student.save();
     res.json(savedStudent);

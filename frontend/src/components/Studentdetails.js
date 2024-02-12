@@ -220,9 +220,9 @@ const Studentdetails = () => {
                         <label htmlFor="hostelRoomNo" className="form-label">Hostel Room No</label>
                         <input type="text" className="form-control" id="hostelRoomNo" name="Hostel_Room_No" value={formData.Hostel_Room_No} onChange={handleChange} />
                     </div>
-                    <div >
+                    {/* <div >
                         <button type="submit" className="submitButton" style={{}}>Submit</button>
-                    </div>
+                    </div> */}
                     <div>
                         <button type="submit" className="updateButton">Update</button>
                     </div>

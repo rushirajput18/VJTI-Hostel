@@ -40,25 +40,24 @@ const Navbar = () => {
               </li>
               {isLoggedIn && (
                 <>
-                 <li className="nav-item">
+                  <li className="nav-item">
                     <Link className="nav-link" to="/admission">
-                     Admission
+                      Admission
                     </Link>
                   </li>
-                 
                   <li className="nav-item">
-                <Link className="nav-link" to="https://rzp.io/l/wVrc0Ngo5">
-                  Fees Payment
-                </Link>
-              </li>
+                    <a className="nav-link" href="https://rzp.io/l/wVrc0Ngo5">
+                      Fees Payment
+                    </a>
+                  </li>
                   <li className="nav-item">
                     <Link className="nav-link" to="/sendcomplaint">
                       Send Complaint
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/Studentdetails">
-                      Student Details
+                    <Link className="nav-link" to="/aboutvjti">
+                      About VJTI Hostel
                     </Link>
                   </li>
                   <li className="nav-item dropdown">
@@ -78,8 +77,15 @@ const Navbar = () => {
                         </Link>
                       </li>
                       <li>
-                        <hr className="dropdown-divider" />
+                        <Link className="dropdown-item" to="/admissionreceived">
+                          Admission Received
+                        </Link>
                       </li>
+                      <li >
+                    <Link className="dropdown-item"  to="/Studentdetails">
+                      Student Details
+                    </Link>
+                  </li>
                     </ul>
                   </li>
                 </>
@@ -87,12 +93,11 @@ const Navbar = () => {
             </ul>
             {!isLoggedIn ? (
               <form className="d-flex" role="search">
-                <Link className="btn mx-1" to="/login" role="button" style={{ backgroundColor: '#7d2ae8', color: 'white' }}>Student Login</Link>
-                <Link className="btn mx-1" role="button" onClick={handleRedirectToLocalhost3001} style={{ backgroundColor: '#7d2ae8', color: 'white' }}>Admin Login</Link>
+                <Link className="link" to="/login" role="button">Student Login</Link>
+                <Link className="link" role="button" onClick={handleRedirectToLocalhost3001}>Admin Login</Link>
               </form>
             ) : (
-              <button onClick={handleLogout} className="btn my-2" to="/login" role="button" style={{ width:'auto', backgroundColor: '#7d2ae8', color: 'white' }}>Logout</button>
-              
+              <button className="logout" onClick={handleLogout} to="/login" role="button">Logout</button>
             )}
           </div>
         </div>
