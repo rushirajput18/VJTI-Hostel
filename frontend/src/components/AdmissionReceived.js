@@ -152,7 +152,6 @@ const AdmissionReceived = () => {
               <td>{detail.year}</td>
               <td>{detail.branch}</td>
               <td>{detail.homeAddress}</td>
-              <td>{detail.block}</td>
               <td>{detail.status}</td>
               <td>
                 <button style={{    width: '131px'}} onClick={() => handleUpdateStatusClick(detail)}>
