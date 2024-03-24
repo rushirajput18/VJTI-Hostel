@@ -1,6 +1,6 @@
 import React from "react";
+import './css/Button.css'
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
 const Navbar = () => {
   const history = useNavigate();
   const location = useLocation();
@@ -22,9 +22,8 @@ const Navbar = () => {
           <Link className="navbar-brand" to="/">
             VJTI Hostel
           </Link>
-          <button
+          <Link
             className="navbar-toggler"
-            type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
@@ -32,7 +31,7 @@ const Navbar = () => {
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
-          </button>
+          </Link>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
@@ -64,7 +63,6 @@ const Navbar = () => {
                     <Link
                       className="nav-link dropdown-toggle"
                       to="/other"
-                      role="button"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
@@ -93,13 +91,10 @@ const Navbar = () => {
             </ul>
             {!isLoggedIn ? (
               <form className="d-flex" role="search">
-
-                <Link className="link" to="/login" role="button">Student Login</Link>
-                <Link className="link" role="button" onClick={handleRedirectToLocalhost3001}>Admin Login</Link>
+              <Link className="link" to="/login" role="button">Login</Link>
               </form>
             ) : (
-              <button className="logout" onClick={handleLogout} to="/login" role="button">Logout</button>
-
+              <Link className="logout" onClick={handleLogout} to="/login" role="button">Logout</Link>
             )}
           </div>
         </div>

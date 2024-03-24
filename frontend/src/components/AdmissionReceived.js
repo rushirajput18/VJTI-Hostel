@@ -63,34 +63,39 @@ const AdmissionReceived = () => {
 
   const handleSearch = () => {
     if (!searchId.trim()) {
-      alert("Please enter an ID to search.");
-      return;
+        alert('Please enter an ID to search.');
+        return;
     }
-
+    
     // Trim the search ID
-    const trimmedSearchId = searchId.trim();
-
-    console.log("Searching for ID:", trimmedSearchId);
-    console.log("Original details:", originalDetails);
-
+    const trimmedSearchTerm = searchId.trim().toLowerCase();
+    
+    console.log("Searching for ID:", trimmedSearchTerm);
+    // console.log("Original details:", details);
 
     // Filter originalDetails based on searchId
-    const filteredDetails = originalDetails.filter(
-      (detail) => String(detail.regId).trim() === trimmedSearchId
-    );
-
-    console.log("Filtered details:", filteredDetails);
-
+    const filteredDetails = details.filter(detail => {
+      if (searchCategory === 'ID') {
+          return String(detail.regId).includes(trimmedSearchTerm);
+      } else if (searchCategory === 'Branch') {
+          return detail.branch.toLowerCase().includes(trimmedSearchTerm);
+      } else if (searchCategory === 'Year') {
+          return detail.year.toLowerCase().includes(trimmedSearchTerm);
+      } else if (searchCategory === 'Gender') {
+          return detail.gender.toLowerCase().includes(trimmedSearchTerm);
+      }
+      return false;
+  });
+  console.log("Filtered details:", filteredDetails);
 
     if (filteredDetails.length === 0) {
-      alert("No student found with the provided ID.");
+        alert('No student found with the provided ID.');
     } else {
-      setDetails(filteredDetails);
-      console.log(filteredDetails.map((detail) => detail.regId)); // Log regId of each detail
+        setDetails(filteredDetails);
     }
-  };
+};
   const handleReset = () => {
-    setDetails(originalDetails);
+    setDetails(details);
     setSearchId("");
   };
 
@@ -152,7 +157,7 @@ const AdmissionReceived = () => {
               <td>{detail.year}</td>
               <td>{detail.branch}</td>
               <td>{detail.homeAddress}</td>
-              <td>{detail.status}</td>
+              <td>{detail.status}</td> 
               <td>
                 <button style={{    width: '131px'}} onClick={() => handleUpdateStatusClick(detail)}>
                   Update Status
